@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	<head>
+		<title>Admin Panel</title>
+      	<meta charset="utf-8" />
+      	<meta name="viewport" content="width=device-width, initial-scale=1" />
+      	<link th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+      	<link th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.css}" rel="stylesheet" media="screen" />
+	    <link th:href="@{/css/admin.css}" rel="stylesheet" media="screen" />
+	    <script th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+	    <script th:src="@{/webjars/bootstrap/3.3.4/js/bootstrap.min.js}"></script>
+	</head>
+	<body>
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+		    	<div class="navbar-header">
+		      		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+		        		<span class="sr-only">Toggle navigation</span>
+		        		<span class="icon-bar"></span>
+		        		<span class="icon-bar"></span>
+		        		<span class="icon-bar"></span>
+		      		</button>
+		      		<a class="navbar-brand" href="/admin">
+		      			<i class="fa fa-calendar"></i> MUM Schedule
+	      			</a>
+		   	 	</div>
+		    	<div id="navbar" class="navbar-collapse collapse">
+		      		<ul class="nav navbar-nav navbar-right">
+		        		<li class="dropdown">
+		              		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+		              			Hello, Admin <span class="caret"></span>
+	              			</a>
+			              	<ul class="dropdown-menu">
+			                	<li>
+			                		<a href="#">
+			                			<i class="fa fa-user"></i> Profile
+		                			</a>
+	                			</li>
+			                	<li>
+			                		<a href="/logout">
+			                			<i class="fa fa-power-off"></i> logout
+		                			</a>
+	                			</li>
+			              	</ul>
+			            </li>
+		      		</ul>
+		    	</div>
+		  	</div>
+		</nav>
+		<div class="container-fluid">
+      		<div class="row">
+        		<div class="col-sm-3 col-md-2 sidebar">
+					<ul class="nav nav-sidebar">
+						<li th:classappend="${#httpServletRequest.getRequestURI() == '/admin/user' ? 'active':''}">
+							<a href="/admin/user">
+								<i class="fa fa-user"></i> User Profile
+							</a>
+						</li>
+						<li th:classappend="${#httpServletRequest.getRequestURI() == '/admin/block' ? 'active':''}">
+							<a href="/admin/block">
+								<i class="fa fa-th-large"></i> Block
+							</a>
+						</li>
+						<li th:classappend="${#httpServletRequest.getRequestURI() == '/admin/course' ? 'active':''}">
+							<a href="/admin/course">
+								<i class="fa fa-book"></i> Course
+							</a>
+						</li>
+						
+						<!-- Other menus -->
+					</ul>
+				</div>
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          			<h1 layout:fragment="title" class="page-header"></h1>
+          			<div layout:fragment="content"></div>
+          		</div>	
+			</div>
+		</div>
+    </body>
+	<footer layout:fragment="footer"></footer>
+</html>
