@@ -3,6 +3,9 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layouts/admin}">
+	<ol layout:fragment="breadcrumb" class="breadcrumb">
+		<li>/</li>
+	</ol>
 	<h1 layout:fragment="title">Welcome to Admin Panel</h1>
 	<div layout:fragment="content">
 		<h3>MUMSched v1.0.0</h3>
