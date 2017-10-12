@@ -3,6 +3,10 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layouts/admin}">
+	<ol layout:fragment="breadcrumb" class="breadcrumb">
+		<li>Course</li>
+	  	<li class="active">List</li>
+	</ol>
 	<h1 layout:fragment="title">Course</h1>
 	<div layout:fragment="content">
 		<h2>We will implement something here ...</h2>
