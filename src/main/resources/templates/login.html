@@ -1,21 +1,47 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+<html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <head>
-        <title>Spring Security Example </title>
+        <title>Welcome to MUMSched</title>
+        <title>Admin Panel</title>
+      	<meta charset="utf-8" />
+      	<meta name="viewport" content="width=device-width, initial-scale=1" />
+      	<link th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+      	<link th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.css}" rel="stylesheet" media="screen" />
+    	<link th:href="@{/css/login.css}" rel="stylesheet" media="screen" />
     </head>
     <body>
-        <div th:if="${param.error}">
-            Invalid username and password.
-        </div>
-        <div th:if="${param.logout}">
-            You have been logged out.
-        </div>
-        <form th:action="@{/login}" method="post">
-            <div><label> User Name : <input type="text" name="username"/> </label></div>
-            <div><label> Password: <input type="password" name="password"/> </label></div>
-            <div><input type="submit" value="Sign In"/></div>
-            <p> user:password</p>
-        </form>
+    	<div class="container">
+    		<form th:action="@{/login}" method="post" class="form-signin">
+    			<h2 align="center" class="form-signin-heading">
+    				<i class="fa fa-calendar"></i> MUMSched v1.0
+   				</h2>
+    			<label for="username" class="sr-only">Username</label>
+	            <input type="text" name="username" class="form-control" placeholder="Username" required autofocus />
+	            <label for="password" class="sr-only">Password</label>
+	            <input type="password" name="password" class="form-control" placeholder="Password" required />
+	            <div class="checkbox">
+	          		<label>
+		            	<input type="checkbox" value="remember-me"> Remember me
+		          	</label>
+		        </div>
+		        
+		        <div th:if="${param.error} OR ${param.logout}" class="alert alert-danger" role="alert">
+		        	<th:block th:if="${param.error}">
+			            Invalid username and password.
+			        </th:block>
+			        <th:block th:if="${param.logout}">
+			            You have been logged out.
+			        </th:block>
+		        </div>
+		        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+	        	<br>
+		        <div class="row hidden-sm-down hidden-md-down">
+	                <div class="col-lg-12" align="center">
+	                    <i class="fa fa-code"></i> BY <b>Poseidon Team</b>
+	                </div>
+	            </div>
+	        </form>
+    	</div>
     </body>
 </html>

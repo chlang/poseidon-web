@@ -1,5 +1,9 @@
 package edu.mum.se.poseidon.web.controllers;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -8,7 +12,7 @@ public class IndexController {
 
 
     @RequestMapping(path = "/")
-    public String indexStart() {
-        return "index";
+    public void indexStart(HttpServletResponse httpServletResponse) throws IOException {
+    	httpServletResponse.sendRedirect("/admin");
     }
 }
