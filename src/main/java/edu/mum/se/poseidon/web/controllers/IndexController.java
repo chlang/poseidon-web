@@ -13,6 +13,6 @@ public class IndexController {
 
     @RequestMapping(path = "/")
     public void indexStart(HttpServletResponse httpServletResponse) throws IOException {
-    	httpServletResponse.sendRedirect("/admin");
+    	httpServletResponse.sendRedirect("/main");
     }
 }

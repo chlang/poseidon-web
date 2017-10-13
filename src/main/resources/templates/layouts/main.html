@@ -21,7 +21,7 @@
 		        		<span class="icon-bar"></span>
 		        		<span class="icon-bar"></span>
 		      		</button>
-		      		<a class="navbar-brand" href="/admin">
+		      		<a class="navbar-brand" href="/main">
 		      			<i class="fa fa-calendar"></i> MUM Schedule
 	      			</a>
 		   	 	</div>
@@ -53,38 +53,38 @@
         		<div class="col-sm-3 col-md-2 sidebar">
 					<ul class="nav nav-sidebar">
 						<th:block th:if="${#httpServletRequest.isUserInRole('ADMIN')}">
-							<li th:classappend="${#httpServletRequest.getRequestURI().contains('/admin/user') ? 'active':''}">
-								<a href="/admin/user">
+							<li th:classappend="${#httpServletRequest.getRequestURI().contains('/main/user') ? 'active':''}">
+								<a href="/main/user">
 									<i class="fa fa-user"></i> User
 								</a>
 							</li>
 							
-							<li th:classappend="${#httpServletRequest.getRequestURI().contains('/admin/block') ? 'active':''}">
-								<a href="/admin/block">
+							<li th:classappend="${#httpServletRequest.getRequestURI().contains('/main/block') ? 'active':''}">
+								<a href="/main/block">
 									<i class="fa fa-th-large"></i> Block
 								</a>
 							</li>
 							
-							<li th:classappend="${#httpServletRequest.getRequestURI().contains('/admin/course') ? 'active':''}">
-								<a href="/admin/course">
+							<li th:classappend="${#httpServletRequest.getRequestURI().contains('/main/course') ? 'active':''}">
+								<a href="/main/course">
 									<i class="fa fa-book"></i> Course
 								</a>
 							</li>
 							
-							<li th:classappend="${#httpServletRequest.getRequestURI().contains('/admin/entry') ? 'active':''}">
-								<a href="/admin/entry">
+							<li th:classappend="${#httpServletRequest.getRequestURI().contains('/main/entry') ? 'active':''}">
+								<a href="/main/entry">
 									<i class="fa fa-book"></i> Entry
 								</a>
 							</li>
 							
-							<li th:classappend="${#httpServletRequest.getRequestURI().contains('/admin/schedule') ? 'active':''}">
-								<a href="/admin/schedule">
+							<li th:classappend="${#httpServletRequest.getRequestURI().contains('/main/schedule') ? 'active':''}">
+								<a href="/main/schedule">
 									<i class="fa fa-book"></i> Schedule
 								</a>
 							</li>
 						</th:block>
-						<li th:classappend="${#httpServletRequest.getRequestURI().contains('/admin/scheduleview') ? 'active':''}">
-							<a href="/admin/scheduleview">
+						<li th:classappend="${#httpServletRequest.getRequestURI().contains('/main/scheduleview') ? 'active':''}">
+							<a href="/main/scheduleview">
 								<i class="fa fa-book"></i> View Schedule
 							</a>
 						</li>

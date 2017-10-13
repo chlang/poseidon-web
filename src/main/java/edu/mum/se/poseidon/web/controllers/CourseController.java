@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class CourseController {
 
-	@RequestMapping(path = "/admin/course", method = RequestMethod.GET)
+	@RequestMapping(path = "/main/course", method = RequestMethod.GET)
 	public String index() {
 		
-		return "admin/course/index";
+		return "main/course/index";
 	}
 }

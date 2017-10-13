@@ -21,26 +21,26 @@ import edu.mum.se.poseidon.web.models.User;
 
 public class UserController {
 
-	@RequestMapping(path = "/admin/user", method = RequestMethod.GET)
+	@RequestMapping(path = "/main/user", method = RequestMethod.GET)
 	public String index() {
 		
-		return "admin/user/index";
+		return "main/user/index";
 	}
 	
-	@RequestMapping(path = "/admin/user/create", method = RequestMethod.GET)
+	@RequestMapping(path = "/main/user/create", method = RequestMethod.GET)
 	public String create(Model model) {
 		model.addAttribute("user", new User());
-		return "admin/user/create";
+		return "main/user/create";
 	}
 	
-	@RequestMapping(path = "/admin/user/create", method = RequestMethod.POST)
+	@RequestMapping(path = "/main/user/create", method = RequestMethod.POST)
 	public String createPOST(@ModelAttribute("user") @Valid User user, 
     		BindingResult bindingResult, @Valid Model model) {
 		
 		if(bindingResult.hasErrors()) {
-			return "admin/user/create";
+			return "main/user/create";
 		}
 		
-		return "admin/user/index";
+		return "main/user/index";
 	}
 }
