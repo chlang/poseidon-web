@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class BlockController {
 
-	@RequestMapping(path = "/main/block", method = RequestMethod.GET)
+	@RequestMapping(path = "/admin/block", method = RequestMethod.GET)
 	public String index() {
 		
-		return "main/block/index";
+		return "admin/block/index";
 	}
 }

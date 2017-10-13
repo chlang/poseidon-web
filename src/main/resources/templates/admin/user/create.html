@@ -5,7 +5,7 @@
 	layout:decorate="~{layouts/main}">
 	<ol layout:fragment="breadcrumb" class="breadcrumb">
 		<li>User</li>
-	  	<li><a href="/main/user">List</a></li>
+	  	<li><a href="/admin/user">List</a></li>
 	  	<li class="active">Create User</li>
 	</ol>
 	<h1 layout:fragment="title">
@@ -14,7 +14,7 @@
 	<div layout:fragment="content">
 		<div class="row">
 			<div class="col-lg-6">
-				<form action="#" th:action="@{/main/user/create}" th:object="${user}" 
+				<form action="#" th:action="@{/admin/user/create}" th:object="${user}" 
 					method="POST">
 					<div class="form-group">
 						<label>First Name</label>
