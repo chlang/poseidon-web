@@ -14,7 +14,7 @@ public class StudentService {
     private RestTemplate restTemplate;
     private Config config;
 
-    private String urlPath = "/students";
+    private String servicePath = "/students";
 
     @Autowired
     public StudentService(RestTemplate restTemplate, Config config) {
@@ -23,8 +23,7 @@ public class StudentService {
     }
 
     public StudentDto getStudent(long studentId) throws Exception {
-        System.out.println("Poseidon core URL: " + config.getBaseUrl());
-        String url = config.getBaseUrl() + urlPath + "/{studentId}";
+        String url = config.getBaseUrl() + servicePath + "/{studentId}";
         ResponseEntity<StudentDto> response = restTemplate.getForEntity(url, StudentDto.class, studentId);
         if ( HttpStatus.OK != response.getStatusCode() ) {
             throw new Exception("Some error occured: " + response.getStatusCodeValue());

@@ -30,6 +30,7 @@ public class StudentController {
             model.addAttribute(mod);
             return "student/profile";
         } catch (Exception e) {
+            e.printStackTrace();
             model.addAttribute("errorMessage", e.getMessage());
             return "error";
         }
