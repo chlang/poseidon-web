@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/main}">
+	<ol layout:fragment="breadcrumb" class="breadcrumb">
+		<li>Entry</li>
+	  	<li class="active">List</li>
+	</ol>
+	<h1 layout:fragment="title">Entry</h1>
+	<div layout:fragment="content">
+		<div class="row">
+			<div class="col-lg-12">
+				<a href="/admin/entries/create" class="btn btn-success">
+					<i class="fa fa-plus"></i>
+				</a> Create Entry
+			</div>
+		</div>
+		<br>
+		<div class="table-responsive">
+			<table class="table table-bordered">
+				<tr>
+					<th>
+						#
+					</th>
+					<th>
+						Start date
+					</th>
+					<th>
+						Name
+					</th>
+					<th>
+						Total number of FPP students.
+					</th>
+					<th>
+						Total number of MPP students.
+					</th>
+					<th>
+						Total number of FPP-OPT students.
+					</th>
+					<th>
+						Total number of MPP-OPT students.
+					</th>
+					<th>
+						Total number of US-Residence students.
+					</th>
+				</tr>
+				<tbody id="user-list">
+				
+				</tbody>
+			</table>
+		</div>
+	</div>
+</html>
