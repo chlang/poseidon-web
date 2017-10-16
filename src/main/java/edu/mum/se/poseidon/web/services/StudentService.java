@@ -31,4 +31,7 @@ public class StudentService {
         return response.getBody();
     }
 
+    public StudentDto updateProfile(StudentDto dto) {
+        return dto;
+    }
 }

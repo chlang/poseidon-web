@@ -15,6 +15,8 @@ public class StudentFromDtoMapper {
         studentModel.setId(studentDto.getId());
         studentModel.setFirstName(studentDto.getFirstName());
         studentModel.setLastName(studentDto.getLastName());
+        studentModel.setUsername(studentDto.getUsername());
+        studentModel.setPassword(studentDto.getPassword());
 
         return studentModel;
     }

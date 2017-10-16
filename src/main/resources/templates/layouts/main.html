@@ -82,13 +82,22 @@
 									<i class="fa fa-book"></i> Schedule
 								</a>
 							</li>
+
+                            <li th:classappend="${#httpServletRequest.getRequestURI().contains('/admin/scheduleview') ? 'active':''}">
+                                <a href="/admin/scheduleview">
+                                    <i class="fa fa-book"></i> View Schedule
+                                </a>
+                            </li>
 						</th:block>
-						<li th:classappend="${#httpServletRequest.getRequestURI().contains('/admin/scheduleview') ? 'active':''}">
-							<a href="/admin/scheduleview">
-								<i class="fa fa-book"></i> View Schedule
-							</a>
-						</li>
-						
+
+                        <th:block th:if="${#httpServletRequest.isUserInRole('STUDENT')}">
+                            <li th:classappend="${#httpServletRequest.getRequestURI().contains('/students/{id}/profile') ? 'active':''}">
+                                <a href="/admin/user">
+                                    <i class="fa fa-user"></i> Profile
+                                </a>
+                            </li>
+                        </th:block>
+
 						<!-- Other menus -->
 					</ul>
 				</div>
