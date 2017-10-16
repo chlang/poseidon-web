@@ -3,9 +3,21 @@ package edu.mum.se.poseidon.web.services.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class AuthenticationDto {
+	
+	@NotNull
+	@NotEmpty
 	private String username;
+	
+	@NotNull
+	@NotEmpty
 	private String password;
+	
+	@NotNull
 	private List<String> roles = new ArrayList<String>();
 	
 	public String getUsername() {
