@@ -2,9 +2,32 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+    <link th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.css}" rel="stylesheet" media="screen" />
     <title>Error</title>
+	<style>
+		.error-template {padding: 40px 15px;text-align: center;}
+		.error-actions {margin-top:15px;margin-bottom:15px;}
+		.error-actions .btn { margin-right:10px; }
+	</style>
 </head>
 <body>
-    Some error occured <p th:text="${errorMessage}">
+	<div class="container">
+	    <div class="row">
+		    <div class="error-template">
+			    <h1>Oops!</h1>
+			    <h2 th:text="${errorMessage}"></h2>
+			    <div class="error-details">
+					Sorry, an error has occured!
+			    </div>
+			    <div class="error-actions">
+					<a href="/admin" class="btn btn-primary">
+					    <i class="fa fa-home"></i> Take Me Home
+				    </a>
+				</div>
+	    	</div>
+    	</div>
+	</div>
 </body>
 </html>
