@@ -8,12 +8,15 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
+	@Autowired
+	private UserDetailsService userDetailsService;
 	
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -34,10 +37,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
-            .inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER")
-                .and().withUser("student").password("password").roles("STUDENT")
-                .and().withUser("faculty").password("password").roles("FACULTY")
-                .and().withUser("admin").password("password").roles("STUDENT", "ADMIN", "USER", "FACULTY");
+//            .inMemoryAuthentication()
+//                .withUser("user").password("password").roles("USER")
+//                .and().withUser("student").password("password").roles("STUDENT")
+//                .and().withUser("faculty").password("password").roles("FACULTY")
+//                .and().withUser("admin").password("password").roles("STUDENT", "ADMIN", "USER", "FACULTY");
+        .userDetailsService(userDetailsService);
     }
 }
