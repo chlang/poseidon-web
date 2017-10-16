@@ -1,22 +1,39 @@
 package edu.mum.se.poseidon.web.models;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public class EntryModel {
 
-    private LocalDate startDate;
+    private Long id;
+    @NotNull
+    private String startDate;
+    @NotNull
     private Integer nFppStudents;
+    @NotNull
     private Integer nMppStudents;
+    @NotNull
     private Integer nFppOpt;
+    @NotNull
     private Integer nMppOpt;
+    @NotNull
     private Integer usRes;
+    @NotNull
     private String name;
 
-    public LocalDate getStartDate() {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 

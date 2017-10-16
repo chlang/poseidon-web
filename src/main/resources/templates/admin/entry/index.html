@@ -1,54 +1,77 @@
 <!DOCTYPE html>
 <html
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layouts/main}">
-	<ol layout:fragment="breadcrumb" class="breadcrumb">
-		<li>Entry</li>
-	  	<li class="active">List</li>
-	</ol>
-	<h1 layout:fragment="title">Entry</h1>
-	<div layout:fragment="content">
-		<div class="row">
-			<div class="col-lg-12">
-				<a href="/admin/entries/create" class="btn btn-success">
-					<i class="fa fa-plus"></i>
-				</a> Create Entry
-			</div>
-		</div>
-		<br>
-		<div class="table-responsive">
-			<table class="table table-bordered">
-				<tr>
-					<th>
-						#
-					</th>
-					<th>
-						Start date
-					</th>
-					<th>
-						Name
-					</th>
-					<th>
-						Total number of FPP students.
-					</th>
-					<th>
-						Total number of MPP students.
-					</th>
-					<th>
-						Total number of FPP-OPT students.
-					</th>
-					<th>
-						Total number of MPP-OPT students.
-					</th>
-					<th>
-						Total number of US-Residence students.
-					</th>
-				</tr>
-				<tbody id="user-list">
-				
-				</tbody>
-			</table>
-		</div>
-	</div>
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/main}">
+<ol layout:fragment="breadcrumb" class="breadcrumb">
+    <li>Entry</li>
+    <li class="active">List</li>
+</ol>
+<h1 layout:fragment="title">Entry</h1>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-lg-12">
+            <a href="/admin/entry/create" class="btn btn-success">
+                <i class="fa fa-plus"></i>
+            </a> Create Entry
+        </div>
+    </div>
+    <br>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    Start date
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Total number of FPP students.
+                </th>
+                <th>
+                    Total number of MPP students.
+                </th>
+                <th>
+                    Total number of FPP-OPT students.
+                </th>
+                <th>
+                    Total number of MPP-OPT students.
+                </th>
+                <th>
+                    Total number of US-Residence students.
+                </th>
+            </tr>
+            <tbody id="entry-list">
+            <th:block th:each="entry, iter : ${entries}">
+                <tr>
+                    <td th:text="${iter.index + 1}"></td>
+                    <td th:text="${entry.startDate}"></td>
+                    <td th:text="${entry.name}"></td>
+                    <td th:text="${entry.nFppStudents}"></td>
+                    <td th:text="${entry.nMppStudents}"></td>
+                    <td th:text="${entry.nFppOpt}"></td>
+                    <td th:text="${entry.nMppOpt}"></td>
+                    <td th:text="${entry.usRes}"></td>
+                    <td align="center">
+                        <div class="btn-group">
+                            <a th:href="@{'/admin/entry/edit/' + ${entry.id}}" class="btn btn-primary" title="edit">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a th:href="@{'/admin/entry/delete/' + ${entry.id}}"
+                               onclick="return confirm('Are you sure to delete?')" class="btn btn-danger"
+                               title="delete">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+</div>
 </html>

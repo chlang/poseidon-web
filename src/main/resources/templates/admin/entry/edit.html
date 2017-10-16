@@ -6,15 +6,15 @@
 <ol layout:fragment="breadcrumb" class="breadcrumb">
     <li>Entry</li>
     <li><a href="/admin/entry">List</a></li>
-    <li class="active">Create Entry</li>
+    <li class="active">Edit Entry</li>
 </ol>
 <h1 layout:fragment="title">
-    Create Entry
+    Edit Entry
 </h1>
 <div layout:fragment="content">
     <div class="row">
         <div class="col-lg-6">
-            <form action="#" th:action="@{/admin/entry/create}" th:object="${entryModel}"
+            <form action="#" th:action="@{'/admin/entry/edit/' + ${entryModel.id}}" th:object="${entryModel}"
                   method="POST">
                 <div class="form-group">
                     <label>Name</label>
