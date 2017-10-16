@@ -9,7 +9,7 @@ public class BlockMapper {
 		if(blockDto == null) return null;
 		Block block = new Block();
 		block.setId(blockDto.getId());
-		block.setEntry(blockDto.getEntry());
+		block.setEntryModel(blockDto.getEntryModel());
 		block.setName(blockDto.getName());
 		block.setStartDate(blockDto.getStartDate());
 		block.setEndDate(blockDto.getEndDate());
@@ -20,7 +20,7 @@ public class BlockMapper {
 		if(block == null) return null;
 		BlockDto blockDto = new BlockDto();
 		blockDto.setId(block.getId());
-		blockDto.setEntry(block.getEntry());
+		blockDto.setEntryModel(block.getEntryModel());
 		blockDto.setName(block.getName());
 		blockDto.setStartDate(block.getStartDate());
 		blockDto.setEndDate(block.getEndDate());

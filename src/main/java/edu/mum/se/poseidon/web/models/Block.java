@@ -8,7 +8,7 @@ public class Block {
 	private String name;
     private LocalDate startDate;
     private LocalDate endDate;
-	private Entry entry;
+	private EntryModel entryModel;
 	
 	public long getId() {
 		return id;
@@ -34,10 +34,10 @@ public class Block {
 	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
-	public Entry getEntry() {
-		return entry;
+	public EntryModel getEntryModel() {
+		return entryModel;
 	}
-	public void setEntry(Entry entry) {
-		this.entry = entry;
+	public void setEntryModel(EntryModel entryModel) {
+		this.entryModel = entryModel;
 	}
 }
