@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/main}">
+	<ol layout:fragment="breadcrumb" class="breadcrumb">
+		<li>User</li>
+	  	<li><a href="/admin/user">List</a></li>
+	  	<li class="active">Edit User</li>
+	</ol>
+	<h1 layout:fragment="title">
+		Edit User
+	</h1>
+	<div layout:fragment="content">
+		<div class="row">
+			<div class="col-lg-6">
+				<form action="#" th:action="@{'/admin/user/edit/' + ${user.id}}" th:object="${user}" 
+					method="POST">
+					<div class="form-group">
+						<label>First Name</label>
+						<input type="text" name="firstName" th:field="*{firstName}" class="form-control">
+						<span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">
+							First Name Error
+						</span>
+					</div>
+					<div class="form-group">
+						<label>Last Name</label>
+						<input type="text" name="lastName" th:field="*{lastName}" class="form-control">
+						<span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">
+							Last Name Error
+						</span>
+					</div>
+					<div class="form-group">
+						<label>Username</label>
+						<input type="text" name="username" th:field="*{username}" class="form-control">
+						<span th:if="${#fields.hasErrors('username')}" class="text-danger" th:errors="*{username}">
+							Username Error
+						</span>
+					</div>
+					<div class="form-group">
+						<label>Password</label>
+						<input type="text" name="password" th:field="*{password}" class="form-control">
+						<span th:if="${#fields.hasErrors('password')}" class="text-danger" th:errors="*{password}">
+							Password Error
+						</span>
+					</div>
+					<div class="form-group">
+						<label>User Type</label>
+						<select name="type" th:field="*{type}" class="form-control">
+							<option value="student">Student</option>
+							<option value="faculty">Faculty</option>
+							<option value="admin">Admin</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-success">Save</button>
+					</div>
+				</form>
+			</div>
+			<div class="col-lg-6"></div>
+		</div>
+		
+	</div>
+</html>

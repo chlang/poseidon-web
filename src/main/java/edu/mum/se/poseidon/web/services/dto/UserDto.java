@@ -1,13 +1,8 @@
-package edu.mum.se.poseidon.web.models;
+package edu.mum.se.poseidon.web.services.dto;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-/**
- * Created by Yuriy Yugay on 10/11/2017.
- *
- * @author Yuriy Yugay
- */
-public class User {
+public class UserDto {
 	private String firstName;
     private String lastName;
     private long id;

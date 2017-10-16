@@ -40,7 +40,29 @@
 					</th>
 				</tr>
 				<tbody id="user-list">
-				
+					<th:block th:each="user, iter : ${users}">	
+						<tr>
+							<td th:text="${iter.index + 1}"></td>
+							<td th:text="${user.firstName}"></td>
+							<td th:text="${user.lastName}"></td>
+							<td th:text="${user.username}"></td>
+							<td>
+								<span th:if="${user.type == 'student'}" th:text="${user.type}" class="label label-success"></span>
+								<span th:if="${user.type == 'faculty'}" th:text="${user.type}" class="label label-warning"></span>
+								<span th:if="${user.type == 'admin'}" th:text="${user.type}" class="label label-danger"></span>
+							</td>
+							<td align="center">
+								<div class="btn-group">
+	               					<a th:href="@{'/admin/user/edit/' + ${user.id}}" class="btn btn-primary" title="edit">
+	               						<i class="fa fa-edit"></i>
+	               					</a>
+	               					<a th:href="@{'/admin/user/delete/' + ${user.id}}" onclick="return confirm('Are you sure to delete?')" class="btn btn-danger" title="delete">
+	               						<i class="fa fa-trash"></i>
+	               					</a>
+					            </div>
+							</td>
+						</tr>
+					</th:block>
 				</tbody>
 			</table>
 		</div>
