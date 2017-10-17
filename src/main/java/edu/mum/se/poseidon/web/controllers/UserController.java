@@ -67,7 +67,7 @@ public class UserController {
 		return "redirect:/admin/user";
 	}
 	
-	@RequestMapping(path = "/admin/user/edit/{id}")
+	@RequestMapping(path = "/admin/user/{id}/edit")
 	public String edit(@PathVariable long id, Model model) throws Exception {
 		UserDto udo = userService.getUser(id);
 		User user = userMapper.getUser(udo);
@@ -75,7 +75,7 @@ public class UserController {
 		return "admin/user/edit";
 	}
 	
-	@RequestMapping(path = "/admin/user/edit/{id}", method = RequestMethod.POST)
+	@RequestMapping(path = "/admin/user/{id}/edit", method = RequestMethod.POST)
 	public String editPOST(@ModelAttribute("user") @Valid User user, 
     		BindingResult bindingResult, @Valid Model model) throws Exception {
 		
@@ -86,7 +86,7 @@ public class UserController {
 		return "redirect:/admin/user";
 	}
 	
-	@RequestMapping(path = "/admin/user/delete/{id}")
+	@RequestMapping(path = "/admin/user/{id}/delete")
 	public String delete(@PathVariable long id, Model model) throws Exception {
 		userService.deleteUser(id);
 		return "redirect:/admin/user";

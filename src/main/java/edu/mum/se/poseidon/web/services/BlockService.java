@@ -68,7 +68,7 @@ public class BlockService {
     }
     
     public BlockDto deleteBlock(long blockId) throws Exception {
-    	url = config.getBaseUrl() + "/blocks/delete/{blockId}";
+    	url = config.getBaseUrl() + "/blocks/{blockId}/delete";
     	ResponseEntity<BlockDto> response = restTemplate.getForEntity(url, BlockDto.class, blockId);
     	if(response.getStatusCode() != HttpStatus.OK) {
     		throw new Exception("Some error occured: " + response.getStatusCodeValue());

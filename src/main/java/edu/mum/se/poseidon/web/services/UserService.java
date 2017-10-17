@@ -71,7 +71,7 @@ public class UserService {
     }
     
     public UserDto deleteUser(long userId) throws Exception {
-    	url = config.getBaseUrl() + "/users/delete/{userId}";
+    	url = config.getBaseUrl() + "/users/{userId}/delete";
     	ResponseEntity<UserDto> response = restTemplate.getForEntity(url, UserDto.class, userId);
     	if(response.getStatusCode() != HttpStatus.OK) {
     		throw new Exception("Some error occured: " + response.getStatusCodeValue());

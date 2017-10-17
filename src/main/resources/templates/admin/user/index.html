@@ -53,10 +53,10 @@
 							</td>
 							<td align="center">
 								<div class="btn-group">
-	               					<a th:href="@{'/admin/user/edit/' + ${user.id}}" class="btn btn-primary" title="edit">
+	               					<a th:href="@{'/admin/user/' + ${user.id} + '/edit'}" class="btn btn-primary" title="edit">
 	               						<i class="fa fa-edit"></i>
 	               					</a>
-	               					<a th:href="@{'/admin/user/delete/' + ${user.id}}" onclick="return confirm('Are you sure to delete?')" class="btn btn-danger" title="delete">
+	               					<a th:href="@{'/admin/user/' + ${user.id} + '/delete'}" onclick="return confirm('Are you sure to delete?')" class="btn btn-danger" title="delete">
 	               						<i class="fa fa-trash"></i>
 	               					</a>
 					            </div>

@@ -48,10 +48,10 @@
 						<td th:text="${block.endDate}"></td>
 						<td align="center">
 							<div class="btn-group">
-	                            <a th:href="@{'/admin/block/edit/' + ${block.id}}" class="btn btn-primary" title="edit">
+	                            <a th:href="@{'/admin/block/' + ${block.id} + '/edit'}" class="btn btn-primary" title="edit">
 	                                <i class="fa fa-edit"></i>
 	                            </a>
-	                            <a th:href="@{'/admin/block/delete/' + ${block.id}}"
+	                            <a th:href="@{'/admin/block/' + ${block.id} + '/delete'}"
 	                               onclick="return confirm('Are you sure to delete?')" class="btn btn-danger"
 	                               title="delete">
 	                                <i class="fa fa-trash"></i>

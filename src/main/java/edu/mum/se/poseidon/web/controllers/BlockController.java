@@ -84,7 +84,7 @@ public class BlockController {
 		return "redirect:/admin/block";
 	}
 	
-	@RequestMapping(path = "/admin/block/edit/{id}")
+	@RequestMapping(path = "/admin/block/{id}/edit")
 	public String edit(@PathVariable long id, Model model) throws Exception {
 		BlockDto bdo = blockService.getBlock(id);
 		Block block = blockMapper.getBlock(bdo);
@@ -98,7 +98,7 @@ public class BlockController {
 		return "admin/block/edit";
 	}
 	
-	@RequestMapping(path = "/admin/block/edit/{id}", method = RequestMethod.POST)
+	@RequestMapping(path = "/admin/block/{id}/edit", method = RequestMethod.POST)
 	public String editPOST(@ModelAttribute("block") @Valid Block block, 
     		BindingResult bindingResult, @Valid Model model) throws Exception {
 		
@@ -115,7 +115,7 @@ public class BlockController {
 		return "redirect:/admin/block";
 	}
 	
-	@RequestMapping(path = "/admin/block/delete/{id}")
+	@RequestMapping(path = "/admin/block/{id}/delete")
 	public String delete(@PathVariable long id, Model model) throws Exception {
 		blockService.deleteBlock(id);
 		return "redirect:/admin/block";

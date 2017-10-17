@@ -14,7 +14,7 @@
 	<div layout:fragment="content">
 		<div class="row">
 			<div class="col-lg-6">
-				<form action="#" th:action="@{'/admin/user/edit/' + ${user.id}}" th:object="${user}" 
+				<form action="#" th:action="@{'/admin/user/' + ${user.id} + '/edit'}" th:object="${user}" 
 					method="POST">
 					<div class="form-group">
 						<label>First Name</label>
