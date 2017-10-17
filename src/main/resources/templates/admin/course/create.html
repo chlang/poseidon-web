@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/main}">
+	<ol layout:fragment="breadcrumb" class="breadcrumb">
+		<li>Course</li>
+	  	<li><a href="/admin/course">List</a></li>
+	  	<li class="active">Create Course</li>
+	</ol>
+	<h1 layout:fragment="title">
+		Create Course
+	</h1>
+	<div layout:fragment="content">
+		<div class="row">
+			<div class="col-lg-6">
+				<form action="#" th:action="@{/admin/course/create}" th:object="${course}" 
+					method="POST">
+					
+					<div class="form-group">
+						<button type="submit" class="btn btn-success">Save</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</html>
