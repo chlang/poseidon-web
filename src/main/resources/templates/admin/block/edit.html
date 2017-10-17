@@ -18,11 +18,11 @@
 					method="POST">
 					<div class="form-group">
 						<label>Entry</label>
-						<select th:field="*{entry.id}" class="form-control">
+						<select th:field="*{entryModel.id}" class="form-control">
 							<option value="">Choose...</option>
 							<option th:each="e : ${entries}" th:value="${e.id}" th:text="${e.name + ' (' + e.startDate + ')'}"></option>
 						</select>
-						<span th:if="${#fields.hasErrors('entry.id')}" th:errors="*{entry.id}" class="text-danger">
+						<span th:if="${#fields.hasErrors('entryModel.id')}" th:errors="*{entryModel.id}" class="text-danger">
 							Entry Error
 						</span>
 					</div>

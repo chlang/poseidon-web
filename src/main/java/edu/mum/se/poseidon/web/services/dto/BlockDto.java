@@ -1,14 +1,12 @@
 package edu.mum.se.poseidon.web.services.dto;
 
-import edu.mum.se.poseidon.web.models.Entry;
-
 public class BlockDto {
 	
 	private long id;
 	private String name;
     private String startDate;
     private String endDate;
-	private Entry entry;
+	private EntryDto entryDto;
 	
 	public long getId() {
 		return id;
@@ -34,10 +32,10 @@ public class BlockDto {
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
-	public Entry getEntry() {
-		return entry;
+	public EntryDto getEntryDto() {
+		return entryDto;
 	}
-	public void setEntry(Entry entry) {
-		this.entry = entry;
+	public void setEntryDto(EntryDto entryDto) {
+		this.entryDto = entryDto;
 	}
 }

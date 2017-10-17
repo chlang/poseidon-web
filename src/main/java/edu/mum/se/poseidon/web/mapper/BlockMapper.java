@@ -1,5 +1,6 @@
 package edu.mum.se.poseidon.web.mapper;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import edu.mum.se.poseidon.web.models.Block;
@@ -8,11 +9,18 @@ import edu.mum.se.poseidon.web.services.dto.BlockDto;
 @Component
 public class BlockMapper {
 
+	private EntryMapper entryMapper;
+	
+	@Autowired
+	public BlockMapper(EntryMapper entryMapper) {
+		this.entryMapper = entryMapper;
+	}
+	
 	public Block getBlock(BlockDto blockDto) {
 		if(blockDto == null) return null;
 		Block block = new Block();
 		block.setId(blockDto.getId());
-		block.setEntry(blockDto.getEntry());
+		block.setEntryModel(entryMapper.getEntryModelFrom(blockDto.getEntryDto()));
 		block.setName(blockDto.getName());
 		block.setStartDate(blockDto.getStartDate());
 		block.setEndDate(blockDto.getEndDate());
@@ -23,7 +31,7 @@ public class BlockMapper {
 		if(block == null) return null;
 		BlockDto blockDto = new BlockDto();
 		blockDto.setId(block.getId());
-		blockDto.setEntry(block.getEntry());
+		blockDto.setEntryDto(entryMapper.getEntryDtoFrom(block.getEntryModel()));
 		blockDto.setName(block.getName());
 		blockDto.setStartDate(block.getStartDate());
 		blockDto.setEndDate(block.getEndDate());

@@ -19,13 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import edu.mum.se.poseidon.web.mapper.BlockMapper;
 import edu.mum.se.poseidon.web.mapper.EntryMapper;
 import edu.mum.se.poseidon.web.models.Block;
-import edu.mum.se.poseidon.web.models.Entry;
-import edu.mum.se.poseidon.web.models.User;
+import edu.mum.se.poseidon.web.models.EntryModel;
 import edu.mum.se.poseidon.web.services.BlockService;
 import edu.mum.se.poseidon.web.services.EntryService;
 import edu.mum.se.poseidon.web.services.dto.BlockDto;
 import edu.mum.se.poseidon.web.services.dto.EntryDto;
-import edu.mum.se.poseidon.web.services.dto.UserDto;
 
 /**
  * Created by Munkhtsogt Tsogbadrakh on 10/11/2017.
@@ -61,8 +59,8 @@ public class BlockController {
 	@RequestMapping(path = "/admin/block/create", method = RequestMethod.GET)
 	public String create(Model model) throws Exception {
 		List<EntryDto> edtos = entryService.getEntries();
-		List<Entry> entries = edtos.stream()
-										.map(e -> entryMapper.getEntry(e))
+		List<EntryModel> entries = edtos.stream()
+										.map(e -> entryMapper.getEntryModelFrom(e))
 										.collect(Collectors.toList());
 		
 		model.addAttribute("entries", entries);
@@ -75,8 +73,8 @@ public class BlockController {
 			BindingResult bindingResult, @Valid Model model) throws Exception {
 		if(bindingResult.hasErrors()) {
 			List<EntryDto> edtos = entryService.getEntries();
-			List<Entry> entries = edtos.stream()
-											.map(e -> entryMapper.getEntry(e))
+			List<EntryModel> entries = edtos.stream()
+											.map(e -> entryMapper.getEntryModelFrom(e))
 											.collect(Collectors.toList());
 			
 			model.addAttribute("entries", entries);
@@ -91,8 +89,8 @@ public class BlockController {
 		BlockDto bdo = blockService.getBlock(id);
 		Block block = blockMapper.getBlock(bdo);
 		List<EntryDto> edtos = entryService.getEntries();
-		List<Entry> entries = edtos.stream()
-										.map(e -> entryMapper.getEntry(e))
+		List<EntryModel> entries = edtos.stream()
+										.map(e -> entryMapper.getEntryModelFrom(e))
 										.collect(Collectors.toList());
 		
 		model.addAttribute("entries", entries);
@@ -106,8 +104,8 @@ public class BlockController {
 		
 		if(bindingResult.hasErrors()) {
 			List<EntryDto> edtos = entryService.getEntries();
-			List<Entry> entries = edtos.stream()
-											.map(e -> entryMapper.getEntry(e))
+			List<EntryModel> entries = edtos.stream()
+											.map(e -> entryMapper.getEntryModelFrom(e))
 											.collect(Collectors.toList());
 			
 			model.addAttribute("entries", entries);
