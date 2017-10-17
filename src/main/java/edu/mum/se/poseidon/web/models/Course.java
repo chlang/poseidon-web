@@ -2,10 +2,14 @@ package edu.mum.se.poseidon.web.models;
 
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
 public class Course {
 
+	@NotNull
 	private String name;
-    private Integer number;
+    @NotNull
+	private Integer number;
     
     private List<Course> prerequisites;
     private List<FacultyModel> faculties;

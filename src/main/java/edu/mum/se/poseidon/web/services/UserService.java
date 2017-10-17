@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import edu.mum.se.poseidon.web.Config;
+import edu.mum.se.poseidon.web.services.dto.FacultyDto;
 import edu.mum.se.poseidon.web.services.dto.UserDto;
 
 @Service
