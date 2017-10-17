@@ -55,9 +55,9 @@
 				<script type="text/javascript">
 					$(function(){
 						$('#block-form button[type="submit"]').click(function(){
-							var entry = $('#block-form select[name="entry.id"]').val();
+							var entry = $('#block-form select[name="entryModel.id"]').val();
 							if(entry == ""){
-								$('#block-form select[name="entry.id"]').focus();
+								$('#block-form select[name="entryModel.id"]').focus();
 								return false;
 							}
 						})
