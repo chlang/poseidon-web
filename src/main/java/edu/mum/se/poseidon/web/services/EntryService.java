@@ -17,6 +17,7 @@ import java.util.List;
 
 @Service
 public class EntryService {
+
     private String url;
     private RestTemplate restTemplate;
     private Config config;

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/main}">
+<ol layout:fragment="breadcrumb" class="breadcrumb">
+    <li>Section</li>
+    <li class="active">List</li>
+</ol>
+<h1 layout:fragment="title">Section</h1>
+<div layout:fragment="content">
+    <br>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    Start date
+                </th>
+                <th>
+                    End date
+                </th>
+                <th>
+                    Max number of seat
+                </th>
+                <th>
+                    Block's name
+                </th>
+                <th>
+                    Location
+                </th>
+                <th>
+                    Faculty's firstname
+                </th>
+                <th>
+                    Faculty's lastname
+                </th>
+            </tr>
+            <tbody id="section-list">
+            <th:block th:each="section, iter : ${sections}">
+                <tr>
+                    <td th:text="${iter.index + 1}"></td>
+                    <td th:text="${section.startDate}"></td>
+                    <td th:text="${section.endDate}"></td>
+                    <td th:text="${section.maxSeats}"></td>
+                    <td th:text="${section.blockName}"></td>
+                    <td th:text="${section.location}"></td>
+                    <td th:text="${section.facultyFirstName}"></td>
+                    <td th:text="${section.facultyLastName}"></td>
+                    <td align="center">
+                        <div class="btn-group">
+                            <a th:href="@{'/admin/section/edit/' + ${section.id}}" class="btn btn-primary" title="edit">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a th:href="@{'/admin/section/delete/' + ${section.id}}"
+                               onclick="return confirm('Are you sure to delete?')" class="btn btn-danger"
+                               title="delete">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+</div>
+</html>

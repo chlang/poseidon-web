@@ -76,6 +76,12 @@
 									<i class="fa fa-book"></i> Entry
 								</a>
 							</li>
+
+							<li th:classappend="${#httpServletRequest.getRequestURI().contains('/admin/section') ? 'active':''}">
+								<a href="/admin/section">
+									<i class="fa fa-book"></i> Section
+								</a>
+							</li>
 							
 							<li th:classappend="${#httpServletRequest.getRequestURI().contains('/admin/schedule') ? 'active':''}">
 								<a href="/admin/schedule">

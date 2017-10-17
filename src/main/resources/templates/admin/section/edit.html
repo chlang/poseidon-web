@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/main}">
+<ol layout:fragment="breadcrumb" class="breadcrumb">
+    <li>Section</li>
+    <li><a href="/admin/section">List</a></li>
+    <li class="active">Edit Section</li>
+</ol>
+<h1 layout:fragment="title">
+    Edit Section
+</h1>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-lg-6">
+            <form action="#" th:action="@{'/admin/section/edit/' + ${sectionModel.id}}" th:object="${sectionModel}"
+                  method="POST">
+                <div class="form-group">
+                    <label>Max number of seat</label>
+                    <input type="text" name="maxSeats" th:field="*{maxSeats}" class="form-control">
+                    <span th:if="${#fields.hasErrors('maxSeats')}" class="text-danger" th:errors="*{maxSeats}">
+							Max number of seat error
+						</span>
+                </div>
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" name="location" th:field="*{location}" class="form-control">
+                    <span th:if="${#fields.hasErrors('location')}" class="text-danger" th:errors="*{location}">
+							Location error
+						</span>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">Save</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-6"></div>
+    </div>
+
+</div>
+</html>
