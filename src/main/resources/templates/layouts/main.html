@@ -73,25 +73,25 @@
 							
 							<li th:classappend="${#httpServletRequest.getRequestURI().contains('/admin/entry') ? 'active':''}">
 								<a href="/admin/entry">
-									<i class="fa fa-book"></i> Entry
+									<i class="fa fa-calendar-o"></i> Entry
 								</a>
 							</li>
 
 							<li th:classappend="${#httpServletRequest.getRequestURI().contains('/admin/section') ? 'active':''}">
 								<a href="/admin/section">
-									<i class="fa fa-book"></i> Section
+									<i class="fa fa-th"></i> Section
 								</a>
 							</li>
 							
 							<li th:classappend="${#httpServletRequest.getRequestURI().contains('/admin/schedule') ? 'active':''}">
 								<a href="/admin/schedule">
-									<i class="fa fa-book"></i> Schedule
+									<i class="fa fa-calendar"></i> Schedule
 								</a>
 							</li>
 
                             <li th:classappend="${#httpServletRequest.getRequestURI().contains('/admin/scheduleview') ? 'active':''}">
                                 <a href="/admin/scheduleview">
-                                    <i class="fa fa-book"></i> View Schedule
+                                    <i class="fa fa-calendar"></i> View Schedule
                                 </a>
                             </li>
 						</th:block>
