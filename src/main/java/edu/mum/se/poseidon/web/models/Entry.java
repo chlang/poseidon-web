@@ -1,11 +1,9 @@
 package edu.mum.se.poseidon.web.models;
 
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 
-public class EntryModel {
-
-    private Long id;
+public class Entry {
+	private Long id;
     @NotNull
     private String startDate;
     @NotNull
@@ -84,5 +82,4 @@ public class EntryModel {
     public void setName(String name) {
         this.name = name;
     }
-    
 }

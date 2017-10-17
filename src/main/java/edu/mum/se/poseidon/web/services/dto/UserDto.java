@@ -1,7 +1,5 @@
 package edu.mum.se.poseidon.web.services.dto;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 public class UserDto {
 	private String firstName;
     private String lastName;
@@ -15,13 +13,10 @@ public class UserDto {
 		this.id = id;
 	}
 
-	@NotEmpty
 	private String username;
-    
-	@NotEmpty
+
 	private String password;
-	
-	@NotEmpty
+
 	private String type;
     
     public String getUsername() {

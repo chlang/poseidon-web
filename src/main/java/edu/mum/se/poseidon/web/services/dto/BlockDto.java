@@ -2,15 +2,15 @@ package edu.mum.se.poseidon.web.services.dto;
 
 import java.time.LocalDate;
 
-import edu.mum.se.poseidon.web.models.EntryModel;
+import edu.mum.se.poseidon.web.models.Entry;
 
 public class BlockDto {
 	
 	private long id;
 	private String name;
-    private LocalDate startDate;
-    private LocalDate endDate;
-	private EntryModel entryModel;
+    private String startDate;
+    private String endDate;
+	private Entry entry;
 	
 	public long getId() {
 		return id;
@@ -24,22 +24,22 @@ public class BlockDto {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public LocalDate getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(LocalDate startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
-	public LocalDate getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
-	public void setEndDate(LocalDate endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
-	public EntryModel getEntryModel() {
-		return entryModel;
+	public Entry getEntry() {
+		return entry;
 	}
-	public void setEntryModel(EntryModel entryModel) {
-		this.entryModel = entryModel;
+	public void setEntry(Entry entry) {
+		this.entry = entry;
 	}
 }

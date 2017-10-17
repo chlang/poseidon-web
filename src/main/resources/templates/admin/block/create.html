@@ -14,20 +14,23 @@
 	<div layout:fragment="content">
 		<div class="row">
 			<div class="col-lg-6">
-				<form action="#" th:action="@{/admin/block/create}" th:object="${block}" 
+				<form id="block-form" action="#" th:action="@{/admin/block/create}" th:object="${block}" 
 					method="POST">
 					<div class="form-group">
 						<label>Entry</label>
-						<input type="text" name="entry" th:field="*{entry}" class="form-control">
-						<span th:if="${#fields.hasErrors('entry')}" th:errors="*{entry}">
+						<select th:field="*{entry.id}" class="form-control">
+							<option value="">Choose...</option>
+							<option th:each="e : ${entries}" th:value="${e.id}" th:text="${e.name}"></option>
+						</select>
+						<span th:if="${#fields.hasErrors('entry.id')}" th:errors="*{entry.id}" class="text-danger">
 							Entry Error
 						</span>
 					</div>
 					<div class="form-group">
 						<label>Name</label>
 						<input type="text" name="name" th:field="*{name}" class="form-control">
-						<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
-							Entry Error
+						<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger">
+							Name Error
 						</span>
 					</div>
 					<div class="form-group">
@@ -40,7 +43,7 @@
 					<div class="form-group">
 						<label>End Date</label>
 						<input type="date" name="endDate" th:field="*{endDate}" class="form-control">
-						<span th:if="${#fields.hasErrors('endDate')}" th:errors="endDate">
+						<span th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}">
 							End Date Error
 						</span>
 					</div>
@@ -51,5 +54,4 @@
 			</div>
 		</div>
 	</div>
-	
 </html>

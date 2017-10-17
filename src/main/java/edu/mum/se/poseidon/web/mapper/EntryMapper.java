@@ -1,6 +1,7 @@
 package edu.mum.se.poseidon.web.mapper;
 
 import edu.mum.se.poseidon.web.configs.Helper;
+import edu.mum.se.poseidon.web.models.Entry;
 import edu.mum.se.poseidon.web.models.EntryModel;
 import edu.mum.se.poseidon.web.services.dto.EntryDto;
 import org.springframework.stereotype.Component;
@@ -38,5 +39,21 @@ public class EntryMapper {
         entryDto.setStartDate(entryModel.getStartDate());
         entryDto.setUsRes(entryModel.getUsRes());
         return entryDto;
+    }
+    
+    public Entry getEntry(EntryDto entryDto) {
+    	if (entryDto == null) {
+            return null;
+        }
+        Entry entry = new Entry();
+        entry.setId(entryDto.getId());
+        entry.setName(entryDto.getName());
+        entry.setnFppOpt(entryDto.getnFppOpt());
+        entry.setnFppStudents(entryDto.getnFppStudents());
+        entry.setnMppOpt(entryDto.getnMppOpt());
+        entry.setnMppStudents(entryDto.getnMppStudents());
+        entry.setStartDate(entryDto.getStartDate());
+        entry.setUsRes(entryDto.getUsRes());
+        return entry;
     }
 }
