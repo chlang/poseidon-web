@@ -21,7 +21,7 @@ public class SectionService {
     private String url;
     private RestTemplate restTemplate;
     private Config config;
-    private static final Logger log = LoggerFactory.getLogger(SectionService.class);
+    private static final Logger logger = LoggerFactory.getLogger(SectionService.class);
 
     @Autowired
     public SectionService(RestTemplate restTemplate, Config config) {

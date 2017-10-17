@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class EntryController {
@@ -34,7 +35,10 @@ public class EntryController {
     @RequestMapping(path = "/admin/entry", method = RequestMethod.GET)
     public String index(Model model) throws Exception {
         List<EntryDto> entryDtoList = entryService.getEntries();
-        model.addAttribute("entries", entryDtoList);
+        List<EntryModel> entryModelList = entryDtoList.stream()
+                .map(e -> entryMapper.getEntryModelFrom(e))
+                .collect(Collectors.toList());
+        model.addAttribute("entries", entryModelList);
         return "admin/entry/index";
     }
 

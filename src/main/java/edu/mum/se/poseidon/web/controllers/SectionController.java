@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class SectionController {
@@ -34,7 +35,10 @@ public class SectionController {
     @RequestMapping(path = "/admin/section", method = RequestMethod.GET)
     public String index(Model model) throws Exception {
         List<SectionDto> sectionDtoList = sectionService.getSections();
-        model.addAttribute("sections", sectionDtoList);
+        List<SectionModel> sectionModels = sectionDtoList.stream()
+                .map(s -> sectionMapper.getSectionModelFrom(s))
+                .collect(Collectors.toList());
+        model.addAttribute("sections", sectionModels);
         return "admin/section/index";
     }
 
@@ -49,13 +53,10 @@ public class SectionController {
     @RequestMapping(path = "/admin/section/edit/{id}", method = RequestMethod.POST)
     public String editPOST(@ModelAttribute("sectionModel") @Valid SectionModel sectionModel,
                            BindingResult bindingResult, @Valid Model model) throws Exception {
-        System.out.println("AAAAA");
         if (bindingResult.hasErrors()) {
             return "admin/section/edit";
         }
-        System.out.println("AAAAA1");
         sectionService.editSection(sectionMapper.getSectionDtoFrom(sectionModel));
-        System.out.println("AAAAA2");
         return "redirect:/admin/section";
     }
 
