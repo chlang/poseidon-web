@@ -1,7 +1,5 @@
 package edu.mum.se.poseidon.web.services.dto;
 
-import java.time.LocalDate;
-
 import edu.mum.se.poseidon.web.models.Entry;
 
 public class BlockDto {

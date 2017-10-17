@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/main}">
+	<ol layout:fragment="breadcrumb" class="breadcrumb">
+		<li>Block</li>
+	  	<li><a href="/admin/block">List</a></li>
+	  	<li class="active">Edit Block</li>
+	</ol>
+	<h1 layout:fragment="title">
+		Edit Block
+	</h1>
+	<div layout:fragment="content">
+		<div class="row">
+			<div class="col-lg-6">
+				<form id="block-form" action="#" th:action="@{'/admin/block/edit/' + ${block.id}}" th:object="${block}" 
+					method="POST">
+					<div class="form-group">
+						<label>Entry</label>
+						<select th:field="*{entry.id}" class="form-control">
+							<option value="">Choose...</option>
+							<option th:each="e : ${entries}" th:value="${e.id}" th:text="${e.name + ' (' + e.startDate + ')'}"></option>
+						</select>
+						<span th:if="${#fields.hasErrors('entry.id')}" th:errors="*{entry.id}" class="text-danger">
+							Entry Error
+						</span>
+					</div>
+					<div class="form-group">
+						<label>Name</label>
+						<input type="text" name="name" th:field="*{name}" class="form-control">
+						<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger">
+							Name Error
+						</span>
+					</div>
+					<div class="form-group">
+						<label>Start Date</label>
+						<input type="date" name="startDate" th:field="*{startDate}" class="form-control">
+						<span th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}">
+							Start Date Error
+						</span>
+					</div>
+					<div class="form-group">
+						<label>End Date</label>
+						<input type="date" name="endDate" th:field="*{endDate}" class="form-control">
+						<span th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}">
+							End Date Error
+						</span>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-success">Save</button>
+					</div>
+				</form>
+				<script type="text/javascript">
+					$(function(){
+						$('#block-form button[type="submit"]').click(function(){
+							var entry = $('#block-form select[name="entry.id"]').val();
+							if(entry == ""){
+								$('#block-form select[name="entry.id"]').focus();
+								return false;
+							}
+						})
+					})
+				</script>
+			</div>
+		</div>
+	</div>
+</html>

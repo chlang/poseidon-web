@@ -2,7 +2,11 @@ package edu.mum.se.poseidon.web.models;
 
 import javax.validation.constraints.NotNull;
 
+/* 
+ * It's used for create block. Pls dont delete Mogi
+ * */
 public class Entry {
+	
 	private Long id;
     @NotNull
     private String startDate;

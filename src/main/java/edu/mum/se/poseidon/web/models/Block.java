@@ -1,12 +1,9 @@
 package edu.mum.se.poseidon.web.models;
 
-import java.time.LocalDate;
-
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.format.annotation.DateTimeFormat;
 
 public class Block {
 

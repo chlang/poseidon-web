@@ -20,7 +20,7 @@
 						<label>Entry</label>
 						<select th:field="*{entry.id}" class="form-control">
 							<option value="">Choose...</option>
-							<option th:each="e : ${entries}" th:value="${e.id}" th:text="${e.name}"></option>
+							<option th:each="e : ${entries}" th:value="${e.id}" th:text="${e.name + ' (' + e.startDate + ')'}"></option>
 						</select>
 						<span th:if="${#fields.hasErrors('entry.id')}" th:errors="*{entry.id}" class="text-danger">
 							Entry Error
@@ -51,6 +51,18 @@
 						<button type="submit" class="btn btn-success">Save</button>
 					</div>
 				</form>
+				
+				<script type="text/javascript">
+					$(function(){
+						$('#block-form button[type="submit"]').click(function(){
+							var entry = $('#block-form select[name="entry.id"]').val();
+							if(entry == ""){
+								$('#block-form select[name="entry.id"]').focus();
+								return false;
+							}
+						})
+					})
+				</script>
 			</div>
 		</div>
 	</div>

@@ -40,7 +40,25 @@
 					</th>
 				</tr>
 				<tbody id="block-list">
-					
+					<tr th:each="block, iter : ${blocks}">
+						<td th:text="${iter.index + 1}"></td>
+						<td th:text="${block.entry.name}"></td>
+						<td th:text="${block.name}"></td>
+						<td th:text="${block.startDate}"></td>
+						<td th:text="${block.endDate}"></td>
+						<td>
+							<div class="btn-group">
+	                            <a th:href="@{'/admin/block/edit/' + ${block.id}}" class="btn btn-primary" title="edit">
+	                                <i class="fa fa-edit"></i>
+	                            </a>
+	                            <a th:href="@{'/admin/block/delete/' + ${block.id}}"
+	                               onclick="return confirm('Are you sure to delete?')" class="btn btn-danger"
+	                               title="delete">
+	                                <i class="fa fa-trash"></i>
+	                            </a>
+	                        </div>
+						</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>
