@@ -1,15 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <link href="../static/css/index.css" th:href="@{../static/css/index.css}" rel="stylesheet" media="screen"/>
-
-    <title> Poseidon</title>
-    <meta charset="UTF-8" http-equiv="Content-Type" content="text/html" />
-    <title>Title</title>
-</head>
-<body>
-    <h1>Hello</h1>
-
-    <h2>Poseidon</h2>
-</body>
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/main}">
+	<ol layout:fragment="breadcrumb" class="breadcrumb">
+		<li>/</li>
+	</ol>
+	<h1 layout:fragment="title">Welcome to Admin Panel</h1>
+	<div layout:fragment="content">
+		<h3>MUMSched v1.0.0</h3>
+		<p>
+			By Team <b>Poseidon</b>
+		</p>
+		<p>
+			<b>Software Engineering</b>
+		</p>
+		<p>Professor Steve Nolle</p>
+	</div>
 </html>
