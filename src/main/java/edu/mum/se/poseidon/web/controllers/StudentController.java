@@ -33,7 +33,7 @@ public class StudentController {
     public String getStudentProfile(@PathVariable long id, Model model) {
         try {
             StudentDto studentDto = studentService.getStudent(id);
-            StudentModel mod = studentFromDtoMapper.getStudentModelFrom(studentDto);
+            StudentModel mod = studentFromDtoMapper.getStudentModelFrom(id, studentDto);
             model.addAttribute("student", mod);
             return "student/profile";
         } catch (Exception e) {
@@ -49,7 +49,7 @@ public class StudentController {
                                        Model model) {
         try {
             StudentDto dto = studentToDtoMapper.getStudentDtoFrom(studentModel);
-            StudentDto updatedDto = studentService.updateProfile(dto);
+            StudentDto updatedDto = studentService.updateProfile(id, dto);
             model.addAttribute("student", updatedDto);
             return "student/profile";
         } catch (Exception e) {

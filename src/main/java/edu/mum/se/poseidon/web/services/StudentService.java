@@ -22,16 +22,23 @@ public class StudentService {
         this.config = config;
     }
 
-    public StudentDto getStudent(long studentId) throws Exception {
+    public StudentDto getStudent(long studentId)
+            throws Exception {
         String url = config.getBaseUrl() + servicePath + "/{studentId}";
         ResponseEntity<StudentDto> response = restTemplate.getForEntity(url, StudentDto.class, studentId);
         if ( HttpStatus.OK != response.getStatusCode() ) {
-            throw new Exception("Some error occured: " + response.getStatusCodeValue());
+            throw new RuntimeException("Some error occured: " + response.getStatusCodeValue());
         }
         return response.getBody();
     }
 
-    public StudentDto updateProfile(StudentDto dto) {
-        return dto;
+    public StudentDto updateProfile(long studentId, StudentDto dto)
+            throws Exception {
+        String url = config.getBaseUrl() + servicePath + "/" + studentId;
+        ResponseEntity<StudentDto> response = restTemplate.postForEntity(url, dto, StudentDto.class);
+        if ( HttpStatus.OK != response.getStatusCode() ) {
+            throw new RuntimeException("Some error occured: " + response.getStatusCodeValue());
+        }
+        return response.getBody();
     }
 }

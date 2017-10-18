@@ -1,19 +1,14 @@
 package edu.mum.se.poseidon.web.mapper;
 
-import edu.mum.se.poseidon.web.models.StudentModel;
-import edu.mum.se.poseidon.web.services.dto.StudentDto;
+import edu.mum.se.poseidon.web.models.FacultyModel;
+import edu.mum.se.poseidon.web.services.dto.FacultyProfileDto;
 import org.springframework.stereotype.Component;
 
-/**
- * Created by Yuriy Yugay on 10/15/2017.
- *
- * @author Yuriy Yugay
- */
 @Component
-public class StudentToDtoMapper {
+public class FacultyToDtoMapper {
 
-    public StudentDto getStudentDtoFrom(StudentModel studentModel) {
-        StudentDto dto = new StudentDto();
+    public FacultyProfileDto getFacultyDtoFrom(FacultyModel studentModel) {
+        FacultyProfileDto dto = new FacultyProfileDto();
         dto.setFirstName(studentModel.getFirstName());
         dto.setLastName(studentModel.getLastName());
         dto.setUsername(studentModel.getUsername());

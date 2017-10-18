@@ -7,12 +7,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class StudentFromDtoMapper {
 
-    public StudentModel getStudentModelFrom(StudentDto studentDto) {
+    public StudentModel getStudentModelFrom(long id, StudentDto studentDto) {
         if(studentDto == null) {
             return null;
         }
         StudentModel studentModel = new StudentModel();
-        studentModel.setId(studentDto.getId());
+        studentModel.setId(id);
         studentModel.setFirstName(studentDto.getFirstName());
         studentModel.setLastName(studentDto.getLastName());
         studentModel.setUsername(studentDto.getUsername());

@@ -1,6 +1,6 @@
 package edu.mum.se.poseidon.web.services.dto;
 
-public class StudentDto {
+public class FacultyProfileDto {
 
     private String firstName;
     private String lastName;
@@ -38,5 +38,4 @@ public class StudentDto {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
 }
