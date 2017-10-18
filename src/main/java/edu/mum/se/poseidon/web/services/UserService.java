@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 
 import edu.mum.se.poseidon.web.Config;
 import edu.mum.se.poseidon.web.services.dto.UserDto;
+import org.springframework.web.servlet.handler.UserRoleAuthorizationInterceptor;
 
 @Service
 public class UserService {
@@ -29,7 +30,7 @@ public class UserService {
     	this.restTemplate = restTemplate;
     	this.config = config;
     }
-    
+
     public UserDto getUser(long userId) throws Exception {
     	url = config.getBaseUrl() + "/users/{userId}";
     	ResponseEntity<UserDto> response = restTemplate.getForEntity(url, UserDto.class, userId);

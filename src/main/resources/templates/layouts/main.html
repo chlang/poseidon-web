@@ -97,12 +97,20 @@
 						</th:block>
 
                         <th:block th:if="${#httpServletRequest.isUserInRole('STUDENT')}">
-                            <li th:classappend="${#httpServletRequest.getRequestURI().contains('/students/{id}/profile') ? 'active':''}">
-                                <a href="/admin/user">
+                            <li th:classappend="${#httpServletRequest.getRequestURI().contains('/students/{id}/profile(id=${user.id})') ? 'active':''}">
+                                <a href="/student/profile">
                                     <i class="fa fa-user"></i> Profile
                                 </a>
                             </li>
                         </th:block>
+
+						<th:block th:if="${#httpServletRequest.isUserInRole('FACULTY')}">
+							<li th:classappend="${#httpServletRequest.getRequestURI().contains('/faculties/{id}/profile') ? 'active':''}">
+                                <a href="/faculty/profile">
+									<i class="fa fa-user"></i> Profile
+								</a>
+							</li>
+						</th:block>
 
 						<!-- Other menus -->
 					</ul>

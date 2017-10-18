@@ -1,10 +1,12 @@
 package edu.mum.se.poseidon.web.services;
 
+import edu.mum.se.poseidon.web.CustomAuthUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -56,8 +58,10 @@ public class LoginService implements UserDetailsService {
 			grantedAuthorities.add(new SimpleGrantedAuthority(role));
 		}
 
-		return new org.springframework.security.core.userdetails.User(dto.getUsername(), dto.getPassword(),
+		User u = new User(dto.getUsername(), dto.getPassword(),
 				grantedAuthorities);
+
+		return new CustomAuthUser(u, dto.getId());
 
 	}
 }
