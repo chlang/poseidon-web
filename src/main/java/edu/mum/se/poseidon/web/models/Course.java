@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 
 public class Course {
 
+	private Long id;
 	@NotNull
 	private String name;
     @NotNull
@@ -14,6 +15,14 @@ public class Course {
     private List<Course> prerequisites;
     private List<FacultyModel> faculties;
     private List<SectionModel> sections;
+    
+    public Long getId() {
+    	return id;
+    }
+    
+    public void setId(Long id) {
+    	this.id = id;
+    }
     
     public String getName() {
         return name;

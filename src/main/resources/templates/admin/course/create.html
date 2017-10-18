@@ -39,7 +39,7 @@
 					<div class="form-group">
 						<label>Faculties</label>
 						<select th:field="*{faculties}" class="form-control" multiple>
-							<option th:each="p : ${professors}" th:value="${p.id}" th:text="${p.firstName + ' ' + p.lastName}"></option>
+							<option th:each="f : ${faculties}" th:value="${f.id}" th:text="${f.firstName + ' ' + f.lastName}"></option>
 						</select>
 					</div>
 					<div class="form-group">
