@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import edu.mum.se.poseidon.web.mapper.CourseMapper;
 import edu.mum.se.poseidon.web.mapper.FacultyMapper;
 import edu.mum.se.poseidon.web.models.Course;
+import edu.mum.se.poseidon.web.models.FacultyModel;
 import edu.mum.se.poseidon.web.services.CourseService;
 import edu.mum.se.poseidon.web.services.FacultyService;
 import edu.mum.se.poseidon.web.services.dto.CourseDto;
@@ -52,8 +53,8 @@ public class CourseController {
 	
 	@RequestMapping(path = "/admin/course", method = RequestMethod.GET)
 	public String index(Model model) throws Exception {
-		List<CourseDto> courses = courseService.getCourses();
-		model.addAttribute("courses", courses.stream()
+		List<CourseDto> dtos = courseService.getCourses();
+		model.addAttribute("courses", dtos.stream()
 				.map(c -> courseMapper.getCourse(c))
 				.collect(Collectors.toList()));
 		return "admin/course/index";
@@ -106,6 +107,10 @@ public class CourseController {
 				.map(c -> courseMapper.getCourse(c))
 				.collect(Collectors.toList()));
 		model.addAttribute("course", course);
+		model.addAttribute("selectedPrerequisites", course.getPrerequisites().stream()
+				.map(Course::getId).collect(Collectors.toList()));
+		model.addAttribute("selectedFaculties", course.getFaculties().stream()
+				.map(FacultyModel::getId).collect(Collectors.toList()));
 		return "admin/course/edit";
 	}
 	
@@ -116,14 +121,23 @@ public class CourseController {
 		if(bindingResult.hasErrors()) {
 			List<FacultyProfileDto> faculties = facultyService.getFaculties();
 			List<CourseDto> courses = courseService.getCourses();
-			model.addAttribute("courses", courses.stream()
+			model.addAttribute("prerequisites", courses.stream()
 					.map(c -> courseMapper.getCourse(c))
 					.collect(Collectors.toList()));
 			model.addAttribute("faculties", faculties.stream()
 					.map(f -> facultyMapper.getFaculty(f))
 					.collect(Collectors.toList()));
+			model.addAttribute("selectedPrerequisites", course.getPrerequisites().stream()
+					.map(Course::getId).collect(Collectors.toList()));
+			model.addAttribute("selectedFaculties", course.getFaculties().stream()
+					.map(FacultyModel::getId).collect(Collectors.toList()));
 			return "admin/course/edit";
 		}
+		
+		for(Course pre: course.getPrerequisites()) {
+			log.info("Preq: " + pre.getName());
+		}
+		
 		courseService.editCourse(courseMapper.getCourseDto(course));
 		return "redirect:/admin/course";
 	}

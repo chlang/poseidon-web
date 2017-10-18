@@ -44,14 +44,14 @@
 						<td th:text="${iter.index + 1}"></td>
 						<td>
 							<th:block th:each="pre: ${course.prerequisites}">
-								<span th:text="${pre.name}" class="label label-succes"></span>
+								<span th:text="${pre.name + ' ' + pre.number}" class="label label-warning"></span>
 							</th:block>
 						</td>
 						<td th:text="${course.name}"></td>
 						<td th:text="${course.number}"></td>
 						<td>
-							<th:block th:each="faculty: ${course.faculties}">
-								<span th:text="${faculty.firstName + ' ' + faculty.lastName} " 
+							<th:block th:each="fac: ${course.faculties}">
+								<span th:text="${fac.firstName + ' ' + fac.lastName} " 
 									class="label label-danger"></span>
 							</th:block>
 						</td>
