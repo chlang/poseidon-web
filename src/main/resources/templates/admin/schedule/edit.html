@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/main}">
+<ol layout:fragment="breadcrumb" class="breadcrumb">
+    <li>Schedule</li>
+    <li><a href="/admin/schedule">List</a></li>
+    <li class="active">Edit Schedule</li>
+</ol>
+<h1 layout:fragment="title">
+    Edit Schedule
+</h1>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-lg-6">
+            <form action="#" th:action="@{'/admin/schedule/' + ${scheduleEditModel.id} + '/edit'}"
+                  th:object="${scheduleEditModel}" method="POST">
+                <div class="form-group">
+                    <label>Schedule Id</label>
+                    <input type="text" readonly name="firstName" th:field="*{id}" class="form-control">
+                    <span th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Id Error</span>
+                </div>
+
+                <div class="form-group">
+                    <label>Publish Status</label>
+                    <select class="form-control">
+                        <option value="Draft">In Draft</option>
+                        <option value="Active">Active</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">Save</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-6"></div>
+    </div>
+
+</div>
+</html>
