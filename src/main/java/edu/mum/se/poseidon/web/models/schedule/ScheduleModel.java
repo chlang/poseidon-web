@@ -1,4 +1,4 @@
-package edu.mum.se.poseidon.web.models;
+package edu.mum.se.poseidon.web.models.schedule;
 
 public class ScheduleModel {
     private Long id;
