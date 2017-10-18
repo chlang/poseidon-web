@@ -1,20 +1,23 @@
 package edu.mum.se.poseidon.web.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Course {
 
 	private Long id;
-	@NotNull
+	@NotEmpty
 	private String name;
     @NotNull
 	private Integer number;
     
-    private List<Course> prerequisites;
-    private List<FacultyModel> faculties;
-    private List<SectionModel> sections;
+    private List<Course> prerequisites = new ArrayList<>();
+    private List<FacultyModel> faculties = new ArrayList<>();
+    private List<SectionModel> sections = new ArrayList<>();
     
     public Long getId() {
     	return id;

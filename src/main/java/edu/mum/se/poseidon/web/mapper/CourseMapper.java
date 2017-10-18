@@ -36,4 +36,21 @@ public class CourseMapper {
 					.collect(Collectors.toList()));
 		return courseDto;
 	}
+	
+	public Course getCourse(CourseDto courseDto) {
+		Course course = new Course();
+		course.setId(courseDto.getId());
+		course.setName(courseDto.getName());
+		course.setNumber(courseDto.getNumber());
+		
+		course.setPrerequisites(courseDto.getPrerequisites()
+					.stream()
+					.map(p -> prerequisiteMapper.getCourse(p))
+					.collect(Collectors.toList()));
+		course.setFaculties(courseDto.getFaculties()
+					.stream()
+					.map(f -> facultyMapper.getFaculty(f))
+					.collect(Collectors.toList()));
+		return course;
+	}
 }

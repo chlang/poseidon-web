@@ -1,7 +1,6 @@
 package edu.mum.se.poseidon.web.mapper;
 
 import edu.mum.se.poseidon.web.models.FacultyModel;
-import edu.mum.se.poseidon.web.services.dto.FacultyDto;
 import edu.mum.se.poseidon.web.services.dto.FacultyProfileDto;
 import org.springframework.stereotype.Component;
 

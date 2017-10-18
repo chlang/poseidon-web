@@ -4,7 +4,6 @@ import edu.mum.se.poseidon.web.mapper.FacultyFromDtoMapper;
 import edu.mum.se.poseidon.web.mapper.FacultyToDtoMapper;
 import edu.mum.se.poseidon.web.models.FacultyModel;
 import edu.mum.se.poseidon.web.services.FacultyService;
-import edu.mum.se.poseidon.web.services.dto.FacultyDto;
 import edu.mum.se.poseidon.web.services.dto.FacultyProfileDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

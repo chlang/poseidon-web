@@ -1,7 +1,6 @@
 package edu.mum.se.poseidon.web.services;
 
 import edu.mum.se.poseidon.web.Config;
-import edu.mum.se.poseidon.web.services.dto.FacultyDto;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import edu.mum.se.poseidon.web.Config;
-import edu.mum.se.poseidon.web.services.dto.FacultyDto;
 
 @Service
 public class FacultyService {
@@ -30,9 +28,9 @@ public class FacultyService {
     	this.config = config;
     }
 
-    public List<FacultyDto> getFaculties() throws Exception {
+    public List<FacultyProfileDto> getFaculties() throws Exception {
         url = config.getBaseUrl() + servicePath;
-        ResponseEntity<FacultyDto[]> response = restTemplate.getForEntity(url, FacultyDto[].class);
+        ResponseEntity<FacultyProfileDto[]> response = restTemplate.getForEntity(url, FacultyProfileDto[].class);
         if (response.getStatusCode() != HttpStatus.OK) {
             throw new Exception("Some error occured: " + response.getStatusCodeValue());
         }
