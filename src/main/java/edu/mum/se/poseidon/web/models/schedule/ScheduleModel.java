@@ -1,11 +1,19 @@
 package edu.mum.se.poseidon.web.models.schedule;
 
+import edu.mum.se.poseidon.web.models.SectionModel;
+import edu.mum.se.poseidon.web.services.dto.SectionDto;
+import org.apache.tomcat.jni.Local;
+
+import java.time.LocalDate;
+import java.util.List;
+
 public class ScheduleModel {
     private Long id;
     private String displayName;
     private ScheduleStatus status;
+    private LocalDate generatedDate;
+    private List<SectionDto> sections;
 
-    private String generatedDate;
     private DisplayItem displayItem;
 
     public Long getId() {
@@ -16,11 +24,11 @@ public class ScheduleModel {
         this.id = id;
     }
 
-    public String getGeneratedDate() {
+    public LocalDate getGeneratedDate() {
         return generatedDate;
     }
 
-    public void setGeneratedDate(String generatedDate) {
+    public void setGeneratedDate(LocalDate generatedDate) {
         this.generatedDate = generatedDate;
     }
 
@@ -46,6 +54,15 @@ public class ScheduleModel {
 
     public void setStatus(ScheduleStatus status) {
         this.status = status;
+    }
+
+    public void setSections(List<SectionDto> sections) {
+        this.sections = sections;
+    }
+
+    public List<SectionDto> getSections() {
+
+        return sections;
     }
 
     public class DisplayItem {

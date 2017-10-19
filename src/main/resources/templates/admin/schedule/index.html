@@ -54,19 +54,19 @@
                 </th>
             </tr>
             <tbody id="user-list">
-            <th:block th:each="user, iter : ${schedules}">
+            <th:block th:each="schedule, iter : ${schedules}">
                 <tr>
                     <td th:text="${iter.index + 1}"></td>
-                    <td th:text="${user.displayName}"></td>
-                    <td th:text="${user.generatedDate}"></td>
-                    <td th:text="${user.status}"></td>
+                    <td th:text="${schedule.displayName}"></td>
+                    <td th:text="${schedule.generatedDate}"></td>
+                    <td th:text="${schedule.status}"></td>
                     <td align="center">
                         <div class="btn-group">
-                            <a th:href="@{'/admin/schedule/' + ${user.id} + '/edit'}" class="btn btn-primary"
+                            <a th:href="@{'/admin/schedule/' + ${schedule.id} + '/edit'}" class="btn btn-primary"
                                title="edit">
                                 <i class="fa fa-edit"></i>
                             </a>
-                            <a th:href="@{'/admin/schedule/' + ${user.id} + '/delete'}"
+                            <a th:href="@{'/admin/schedule/' + ${schedule.id} + '/delete'}"
                                onclick="return confirm('Are you sure to delete?')" class="btn btn-danger"
                                title="delete">
                                 <i class="fa fa-trash"></i>
