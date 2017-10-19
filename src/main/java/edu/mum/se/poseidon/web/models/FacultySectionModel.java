@@ -7,8 +7,7 @@ public class FacultySectionModel {
     private String startDate;
     private String endDate;
     private String blockName;
-    private String courseName;
-    private Integer courseNumber;
+    private String courseFullName;
 
     public Long getId() {
         return id;
@@ -58,19 +57,11 @@ public class FacultySectionModel {
         this.blockName = blockName;
     }
 
-    public String getCourseName() {
-        return courseName;
+    public String getCourseFullName() {
+        return courseFullName;
     }
 
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
-    }
-
-    public Integer getCourseNumber() {
-        return courseNumber;
-    }
-
-    public void setCourseNumber(Integer courseNumber) {
-        this.courseNumber = courseNumber;
+    public void setCourseFullName(String courseFullName) {
+        this.courseFullName = courseFullName;
     }
 }

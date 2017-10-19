@@ -1,10 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layouts/main}">
+<ol layout:fragment="breadcrumb" class="breadcrumb">
+    <li>Student</li>
+    <li class="active">Schedule</li>
+</ol>
+<h1 layout:fragment="title">Schedule</h1>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-lg-8">
+            <form action="#">
+                <!-- BLOCK START -->
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Entry {NAME}</div>
+                    <div class="panel-body">
+                        <table class="table table-stripped">
+                            <tr>
+                                <th>
+                                    Course name
+                                </th>
+                                <th>
+                                    Block name
+                                </th>
+                                <th>
+                                    Faculty
+                                </th>
+                                <th>
+                                    Start date
+                                </th>
+                                <th>
+                                    End date
+                                </th>
+                                <th>
+                                    Location
+                                </th>
+                            </tr>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        Algorithm 435
+                                    </td>
+                                    <td>
+                                        Steve Nolle
+                                    </td>
+                                    <td>
+                                        10/10/2017
+                                    </td>
+                                    <td>
+                                        11/10/2017
+                                    </td>
+                                    <td>
+                                        <input type="radio" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- BLOCK END -->
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success pull-right">
+                        Save
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 </html>

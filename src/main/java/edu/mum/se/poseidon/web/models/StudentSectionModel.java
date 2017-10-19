@@ -3,30 +3,27 @@ package edu.mum.se.poseidon.web.models;
 public class StudentSectionModel {
 
     private Long id;
-    private Integer maxSeats;
+    private String courseFullName;
+    private String blockName;
     private String location;
     private String startDate;
     private String endDate;
-    private String blockName;
-    private String facultyFirstName;
-    private String facultyLastName;
-    private String courseName;
-    private Integer courseNumber;
+    private String facultyFullName;
 
-    public String getCourseName() {
-        return courseName;
+    public String getFacultyFullName() {
+        return facultyFullName;
     }
 
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
+    public void setFacultyFullName(String facultyFullName) {
+        this.facultyFullName = facultyFullName;
     }
 
-    public Integer getCourseNumber() {
-        return courseNumber;
+    public String getCourseFullName() {
+        return courseFullName;
     }
 
-    public void setCourseNumber(Integer courseNumber) {
-        this.courseNumber = courseNumber;
+    public void setCourseFullName(String courseFullName) {
+        this.courseFullName = courseFullName;
     }
 
     public Long getId() {
@@ -35,14 +32,6 @@ public class StudentSectionModel {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Integer getMaxSeats() {
-        return maxSeats;
-    }
-
-    public void setMaxSeats(Integer maxSeats) {
-        this.maxSeats = maxSeats;
     }
 
     public String getLocation() {
@@ -75,21 +64,5 @@ public class StudentSectionModel {
 
     public void setBlockName(String blockName) {
         this.blockName = blockName;
-    }
-
-    public String getFacultyFirstName() {
-        return facultyFirstName;
-    }
-
-    public void setFacultyFirstName(String facultyFirstName) {
-        this.facultyFirstName = facultyFirstName;
-    }
-
-    public String getFacultyLastName() {
-        return facultyLastName;
-    }
-
-    public void setFacultyLastName(String facultyLastName) {
-        this.facultyLastName = facultyLastName;
     }
 }

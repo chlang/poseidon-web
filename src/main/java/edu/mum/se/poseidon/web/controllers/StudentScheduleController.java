@@ -35,7 +35,8 @@ public class StudentScheduleController {
             List<StudentSectionDto> studentSectionDtoList
                     = studentScheduleService.getStudentSchedule(user.getId());
 
-            List<StudentSectionModel> sectionModelList = sectionMapper.getStudentSectionModelList(studentSectionDtoList);
+//            List<StudentSectionModel> sectionModelList = sectionMapper.getStudentSectionModelList(studentSectionDtoList);
+            List<StudentSectionModel> sectionModelList = sectionMapper.getStudentSectionModelSTUBList();
 
             model.addAttribute("sections", sectionModelList);
             return "student/schedule";

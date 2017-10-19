@@ -8,6 +8,7 @@ import edu.mum.se.poseidon.web.services.dto.SectionDto;
 import edu.mum.se.poseidon.web.services.dto.StudentSectionDto;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,6 +47,46 @@ public class SectionMapper {
         return sectionModel;
     }
 
+    public List<StudentSectionModel> getStudentSectionModelSTUBList() {
+        StudentSectionModel sectionModel1 = new StudentSectionModel();
+        sectionModel1.setId(1l);
+        sectionModel1.setFacultyFullName("Michael Jordan");
+        sectionModel1.setBlockName("September");
+        sectionModel1.setStartDate("09/01/2017");
+        sectionModel1.setEndDate("09/30/2017");
+        sectionModel1.setLocation("Verill Hall 115");
+        sectionModel1.setCourseFullName("Basketball 495");
+
+        StudentSectionModel sectionModel2 = new StudentSectionModel();
+        sectionModel2.setId(2l);
+        sectionModel2.setFacultyFullName("Eric Cantona");
+        sectionModel2.setBlockName("October");
+        sectionModel2.setStartDate("10/01/2017");
+        sectionModel2.setEndDate("10/30/2017");
+        sectionModel2.setLocation("Verill Hall 120");
+        sectionModel2.setCourseFullName("Football 505");
+
+        StudentSectionModel sectionModel3 = new StudentSectionModel();
+        sectionModel3.setId(3l);
+        sectionModel3.setFacultyFullName("Tiger Woods");
+        sectionModel3.setBlockName("November");
+        sectionModel3.setStartDate("11/01/2017");
+        sectionModel3.setEndDate("11/30/2017");
+        sectionModel3.setLocation("Verill Hall 135");
+        sectionModel3.setCourseFullName("Golf 530");
+
+        StudentSectionModel sectionModel4 = new StudentSectionModel();
+        sectionModel4.setId(4l);
+        sectionModel4.setFacultyFullName("Mike Tyson");
+        sectionModel4.setBlockName("December");
+        sectionModel4.setStartDate("12/01/2017");
+        sectionModel4.setEndDate("12/30/2017");
+        sectionModel4.setLocation("Verill Hall 143");
+        sectionModel4.setCourseFullName("Boxing 580");
+
+        return Arrays.asList();
+    }
+
     public List<StudentSectionModel> getStudentSectionModelList(List<StudentSectionDto> studentSectionDtoList) {
         if(studentSectionDtoList == null) {
             return null;
@@ -63,16 +104,15 @@ public class SectionMapper {
         }
 
         StudentSectionModel sectionModel = new StudentSectionModel();
-        sectionModel.setBlockName(studentSectionDto.getBlockName());
-        sectionModel.setEndDate(studentSectionDto.getEndDate());
-        sectionModel.setFacultyFirstName(studentSectionDto.getFacultyFirstName());
-        sectionModel.setFacultyLastName(studentSectionDto.getFacultyLastName());
         sectionModel.setId(studentSectionDto.getId());
-        sectionModel.setLocation(studentSectionDto.getLocation());
-        sectionModel.setMaxSeats(studentSectionDto.getMaxSeats());
+        sectionModel.setFacultyFullName(studentSectionDto.getFacultyFirstName()
+                + " " + studentSectionDto.getFacultyLastName());
+        sectionModel.setBlockName(studentSectionDto.getBlockName());
         sectionModel.setStartDate(studentSectionDto.getStartDate());
-        sectionModel.setCourseName(studentSectionDto.getCourseName());
-        sectionModel.setCourseNumber(studentSectionDto.getCourseNumber());
+        sectionModel.setEndDate(studentSectionDto.getEndDate());
+        sectionModel.setLocation(studentSectionDto.getLocation());
+        sectionModel.setCourseFullName(studentSectionDto.getCourseName()
+                + " " + studentSectionDto.getCourseNumber());
 
         return sectionModel;
     }
@@ -100,8 +140,8 @@ public class SectionMapper {
         sectionModel.setLocation(facultySectionDto.getLocation());
         sectionModel.setMaxSeats(facultySectionDto.getMaxSeats());
         sectionModel.setStartDate(facultySectionDto.getStartDate());
-        sectionModel.setCourseName(facultySectionDto.getCourseName());
-        sectionModel.setCourseNumber(facultySectionDto.getCourseNumber());
+        sectionModel.setCourseFullName(facultySectionDto.getCourseName()
+                + " " + facultySectionDto.getCourseNumber());
 
         return sectionModel;
     }
