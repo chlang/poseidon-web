@@ -13,6 +13,9 @@ import edu.mum.se.poseidon.web.services.FacultyService;
 import edu.mum.se.poseidon.web.services.dto.CourseDto;
 import edu.mum.se.poseidon.web.services.dto.CourseInfoDto;
 import edu.mum.se.poseidon.web.services.dto.FacultyProfileDto;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -35,7 +38,8 @@ public class FacultyController {
     private FacultyFromDtoMapper facultyFromDtoMapper;
     private FacultyToDtoMapper facultyToDtoMapper;
     private CourseMapper courseMapper;
-
+    private static final Logger log = LoggerFactory.getLogger(FacultyController.class);
+    
     @Autowired
     public FacultyController(FacultyService facultyService,
                              CourseService courseService,
@@ -62,8 +66,12 @@ public class FacultyController {
             List<CourseInfo> courseInfoList = courseMapper.getCourseInfoList(facultyDto.getCourseList());
             FacultyProfileModel mod = facultyFromDtoMapper.getFacultyProfileModelFrom(user.getId(), facultyDto, courseInfoList);
             model.addAttribute("faculty", mod);
-            // TODO need populate in html page
+            
             model.addAttribute("allCourses", courseList);
+            model.addAttribute("selectedCourses", mod.getCourseList()
+            					.stream()
+            					.map(CourseInfo::getId)
+            					.collect(Collectors.toList()));
             return "faculty/profile";
         } catch (Exception e) {
             e.printStackTrace();
@@ -81,9 +89,16 @@ public class FacultyController {
             FacultyProfileDto dto = facultyToDtoMapper.getFacultyProfileDtoFrom(facultyModel, courseInfoDtoList);
             FacultyProfileDto updatedDto = facultyService.updateProfile(id, dto);
 
+            /* this for form */
+            List<Course> courseList = courseMapper.getCourseList(courseService.getCourses());
             List<CourseInfo> courseInfoList = courseMapper.getCourseInfoList(updatedDto.getCourseList());
             facultyModel = facultyFromDtoMapper.getFacultyProfileModelFrom(id, updatedDto, courseInfoList);
             model.addAttribute("faculty", facultyModel);
+            model.addAttribute("allCourses", courseList);
+            model.addAttribute("selectedCourses", facultyModel.getCourseList()
+            					.stream()
+            					.map(CourseInfo::getId)
+            					.collect(Collectors.toList()));
             return "faculty/profile";
         } catch (Exception e) {
             e.printStackTrace();
