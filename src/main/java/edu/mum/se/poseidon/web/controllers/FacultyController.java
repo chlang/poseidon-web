@@ -4,10 +4,13 @@ import edu.mum.se.poseidon.web.CustomAuthUser;
 import edu.mum.se.poseidon.web.mapper.CourseMapper;
 import edu.mum.se.poseidon.web.mapper.FacultyFromDtoMapper;
 import edu.mum.se.poseidon.web.mapper.FacultyToDtoMapper;
+import edu.mum.se.poseidon.web.models.Course;
 import edu.mum.se.poseidon.web.models.CourseInfo;
 import edu.mum.se.poseidon.web.models.FacultyModel;
 import edu.mum.se.poseidon.web.models.FacultyProfileModel;
+import edu.mum.se.poseidon.web.services.CourseService;
 import edu.mum.se.poseidon.web.services.FacultyService;
+import edu.mum.se.poseidon.web.services.dto.CourseDto;
 import edu.mum.se.poseidon.web.services.dto.CourseInfoDto;
 import edu.mum.se.poseidon.web.services.dto.FacultyProfileDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +30,7 @@ import java.util.stream.Stream;
 @Controller
 public class FacultyController {
 
+    private CourseService courseService;
     private FacultyService facultyService;
     private FacultyFromDtoMapper facultyFromDtoMapper;
     private FacultyToDtoMapper facultyToDtoMapper;
@@ -34,6 +38,7 @@ public class FacultyController {
 
     @Autowired
     public FacultyController(FacultyService facultyService,
+                             CourseService courseService,
                              FacultyFromDtoMapper facultyFromDtoMapper,
                              FacultyToDtoMapper facultyToDtoMapper,
                              CourseMapper courseMapper) {
@@ -41,6 +46,7 @@ public class FacultyController {
         this.facultyFromDtoMapper = facultyFromDtoMapper;
         this.facultyToDtoMapper = facultyToDtoMapper;
         this.courseMapper = courseMapper;
+        this.courseService = courseService;
     }
 
 
@@ -51,30 +57,13 @@ public class FacultyController {
 
             FacultyProfileDto facultyDto = facultyService.getFaculty(user.getId());
 
-            /*
-            // STUB START
-            CourseInfoDto dto1 = new CourseInfoDto();
-            dto1.setId(23l);
-            dto1.setName("Algorithm");
-            dto1.setNumber(485);
-
-            CourseInfoDto dto2 = new CourseInfoDto();
-            dto2.setId(35l);
-            dto2.setName("Advanced Software Development");
-            dto2.setNumber(525);
-
-            CourseInfoDto dto3 = new CourseInfoDto();
-            dto3.setId(55l);
-            dto3.setName("Machine Learning");
-            dto3.setNumber(540);
-
-            facultyDto.setCourseList(Stream.of(dto1,dto2,dto3).collect(Collectors.toList()));
-            // STUB END
-            */
+            List<Course> courseList = courseMapper.getCourseList(courseService.getCourses());
 
             List<CourseInfo> courseInfoList = courseMapper.getCourseInfoList(facultyDto.getCourseList());
             FacultyProfileModel mod = facultyFromDtoMapper.getFacultyProfileModelFrom(user.getId(), facultyDto, courseInfoList);
             model.addAttribute("faculty", mod);
+            // TODO need populate in html page
+            model.addAttribute("allCourses", courseList);
             return "faculty/profile";
         } catch (Exception e) {
             e.printStackTrace();

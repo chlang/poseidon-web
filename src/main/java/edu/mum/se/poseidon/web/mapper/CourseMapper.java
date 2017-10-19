@@ -107,4 +107,15 @@ public class CourseMapper {
 
 	    return dto;
     }
+
+	public List<Course> getCourseList(List<CourseDto> courses) {
+		if(courses == null) {
+			return null;
+		}
+
+		return courses.stream()
+				.map(dto -> getCourse(dto))
+				.filter(c -> c != null)
+				.collect(Collectors.toList());
+	}
 }
