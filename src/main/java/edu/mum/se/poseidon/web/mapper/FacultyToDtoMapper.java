@@ -13,6 +13,7 @@ public class FacultyToDtoMapper {
         dto.setLastName(studentModel.getLastName());
         dto.setUsername(studentModel.getUsername());
         dto.setPassword(studentModel.getPassword());
+        dto.setType(studentModel.getType());
 
         return dto;
     }

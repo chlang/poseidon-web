@@ -5,6 +5,7 @@ public class FacultyModel {
     private long id;
     private String firstName;
     private String lastName;
+    private String type;
     private String username;
     private String password;
 
@@ -30,6 +31,14 @@ public class FacultyModel {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+    
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getUsername() {

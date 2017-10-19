@@ -105,6 +105,7 @@ public class CourseController {
 				.collect(Collectors.toList()));
 		model.addAttribute("prerequisites", courses.stream()
 				.map(c -> courseMapper.getCourse(c))
+				.filter(c -> c.getId() != course.getId())
 				.collect(Collectors.toList()));
 		model.addAttribute("course", course);
 		model.addAttribute("selectedPrerequisites", course.getPrerequisites().stream()
@@ -123,6 +124,7 @@ public class CourseController {
 			List<CourseDto> courses = courseService.getCourses();
 			model.addAttribute("prerequisites", courses.stream()
 					.map(c -> courseMapper.getCourse(c))
+					.filter(c -> c.getId() != course.getId())
 					.collect(Collectors.toList()));
 			model.addAttribute("faculties", faculties.stream()
 					.map(f -> facultyMapper.getFaculty(f))
@@ -133,11 +135,6 @@ public class CourseController {
 					.map(FacultyModel::getId).collect(Collectors.toList()));
 			return "admin/course/edit";
 		}
-		
-		for(Course pre: course.getPrerequisites()) {
-			log.info("Preq: " + pre.getName());
-		}
-		
 		courseService.editCourse(courseMapper.getCourseDto(course));
 		return "redirect:/admin/course";
 	}

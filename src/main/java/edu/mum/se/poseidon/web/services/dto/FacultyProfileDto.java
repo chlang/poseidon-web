@@ -5,6 +5,7 @@ public class FacultyProfileDto {
 	private Long id;
     private String firstName;
     private String lastName;
+    private String type;
     private String username;
     private String password;
 
@@ -46,5 +47,13 @@ public class FacultyProfileDto {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+    
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

@@ -15,6 +15,7 @@ public class FacultyMapper {
 		facultyDto.setLastName(faculty.getLastName());
 		facultyDto.setUsername(faculty.getUsername());
 		facultyDto.setPassword(faculty.getPassword());
+		facultyDto.setType(faculty.getType());
 		return facultyDto;
 	}
 	
@@ -25,6 +26,7 @@ public class FacultyMapper {
 		faculty.setLastName(facultyDto.getLastName());
 		faculty.setUsername(facultyDto.getUsername());
 		faculty.setPassword(facultyDto.getPassword());
+		faculty.setType(facultyDto.getType());
 		return faculty;
 	}
 }
