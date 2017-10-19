@@ -42,6 +42,20 @@
 							Password Error
 						</span>
                 </div>
+
+                <select id="courseList" th:field="*{courseList}" size="10" multiple="multiple">
+                    <option th:each="course : ${faculty.courseList}"
+                            th:value="${course.id}"
+                            th:text="${course.name} + ' ' + ${course.number}">
+                        Cinema
+                    </option>
+                </select>
+
+                <!--<div class="form-group" th:each="course : ${faculty.courseList}">-->
+                    <!--<input type="checkbox" th:id="${{course.name}}" th:value="${{course.name}}" th:field="*{courseList}" />-->
+                    <!--<label th:for="${{course}}" th:text="${course.name} + ' ' + ${course.number}">Cinema</label>-->
+                <!--</div>-->
+
                 <div class="form-group">
                     <button type="submit" class="btn btn-success">Update</button>
                 </div>

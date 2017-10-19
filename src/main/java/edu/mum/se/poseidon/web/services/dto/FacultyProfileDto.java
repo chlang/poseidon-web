@@ -1,5 +1,9 @@
 package edu.mum.se.poseidon.web.services.dto;
 
+import edu.mum.se.poseidon.web.models.Course;
+
+import java.util.List;
+
 public class FacultyProfileDto {
 
 	private Long id;
@@ -8,6 +12,15 @@ public class FacultyProfileDto {
     private String type;
     private String username;
     private String password;
+    private List<CourseInfoDto> courseList;
+
+    public List<CourseInfoDto> getCourseList() {
+        return courseList;
+    }
+
+    public void setCourseList(List<CourseInfoDto> courseList) {
+        this.courseList = courseList;
+    }
 
     public Long getId() {
     	return id;

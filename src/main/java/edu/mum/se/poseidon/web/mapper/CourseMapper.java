@@ -1,7 +1,10 @@
 package edu.mum.se.poseidon.web.mapper;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
+import edu.mum.se.poseidon.web.models.CourseInfo;
+import edu.mum.se.poseidon.web.services.dto.CourseInfoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,6 +33,9 @@ public class CourseMapper {
 					.stream()
 					.map(p -> prerequisiteMapper.getPrerequisiteDto(p))
 					.collect(Collectors.toList()));
+
+		// TODO can we change the object name here?
+        // or there should be profileDto? - Yuriy
 		courseDto.setFaculties(course.getFaculties()
 					.stream()
 					.map(f -> facultyMapper.getFacultyDto(f))
@@ -53,4 +59,52 @@ public class CourseMapper {
 					.collect(Collectors.toList()));
 		return course;
 	}
+
+	public List<CourseInfo> getCourseInfoList(List<CourseInfoDto> courseList) {
+		if(courseList == null) {
+			return null;
+		}
+
+		return courseList.stream()
+				.map(dto -> getCourseInfo(dto))
+				.filter(info -> info != null)
+				.collect(Collectors.toList());
+	}
+
+	public CourseInfo getCourseInfo(CourseInfoDto dto) {
+		if(dto == null) {
+			return null;
+		}
+
+		CourseInfo info = new CourseInfo();
+		info.setId(dto.getId());
+		info.setName(dto.getName());
+		info.setNumber(dto.getNumber());
+
+		return info;
+	}
+
+    public List<CourseInfoDto> getCourseInfoDtoList(List<CourseInfo> courseList) {
+        if(courseList == null) {
+            return null;
+        }
+
+        return courseList.stream()
+                .map(course -> getCourseInfoDto(course))
+                .filter(dto -> dto != null)
+                .collect(Collectors.toList());
+    }
+
+    public CourseInfoDto getCourseInfoDto(CourseInfo courseInfo) {
+	    if(courseInfo == null) {
+	        return null;
+        }
+
+        CourseInfoDto dto = new CourseInfoDto();
+	    dto.setId(courseInfo.getId());
+	    dto.setName(courseInfo.getName());
+	    dto.setNumber(courseInfo.getNumber());
+
+	    return dto;
+    }
 }
