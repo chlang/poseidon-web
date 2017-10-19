@@ -59,21 +59,25 @@
         				<div class="panel panel-primary">
 							<div class="panel-heading">Courses</div>
 					  		<div class="panel-body">
-					    		<table class="table table-stripped">
+					    		<table class="table table-stripped" width="100%">
 					    			<tr>
-					    				<th>
+					    				<th width="60%">
 					    					Name
 					    				</th>
-					    				<th>
+					    				<th width="20%">
 					    					Number
 					    				</th>
-					    				<th>
+					    				<th width="20%">
 					    					Action
 					    				</th>
 				    				</tr>
 				    				<tbody>
-				    					<tr>
-				    					
+				    					<tr th:each="course: ${allCourses}">
+				    						<td th:text="${course.name}"></td>
+				    						<td th:text="${course.number}"></td>
+				    						<td align="center">
+				    							<input type="checkbox" id="courseList" name="courseList" th:value="${course.id}" th:checked="${selectedCourses.contains(course.id)}" />
+				    						</td>
 				    					</tr>
 				    				</tbody>
 			    				</table>
