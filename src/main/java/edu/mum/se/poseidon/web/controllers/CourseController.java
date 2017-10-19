@@ -24,6 +24,7 @@ import edu.mum.se.poseidon.web.models.FacultyModel;
 import edu.mum.se.poseidon.web.services.CourseService;
 import edu.mum.se.poseidon.web.services.FacultyService;
 import edu.mum.se.poseidon.web.services.dto.CourseDto;
+import edu.mum.se.poseidon.web.services.dto.FacultyDto;
 import edu.mum.se.poseidon.web.services.dto.FacultyProfileDto;
 
 /**
@@ -62,7 +63,7 @@ public class CourseController {
 	
 	@RequestMapping(path = "/admin/course/create", method = RequestMethod.GET)
 	public String create(Model model) throws Exception {
-		List<FacultyProfileDto> faculties = facultyService.getFaculties();
+		List<FacultyDto> faculties = facultyService.getFacultyList();
 		List<CourseDto> courses = courseService.getCourses();
 		model.addAttribute("course", new Course());
 		model.addAttribute("faculties", faculties.stream()
@@ -80,7 +81,7 @@ public class CourseController {
 		
 
 		if(bindingResult.hasErrors()) {
-			List<FacultyProfileDto> faculties = facultyService.getFaculties();
+			List<FacultyDto> faculties = facultyService.getFacultyList();
 			List<CourseDto> courses = courseService.getCourses();
 			model.addAttribute("prerequisites", courses.stream()
 					.map(c -> courseMapper.getCourse(c))
@@ -96,7 +97,7 @@ public class CourseController {
 	
 	@RequestMapping(path = "/admin/course/{id}/edit")
     public String edit(@PathVariable long id, Model model) throws Exception {
-		List<FacultyProfileDto> faculties = facultyService.getFaculties();
+		List<FacultyDto> faculties = facultyService.getFacultyList();
 		List<CourseDto> courses = courseService.getCourses();
 		CourseDto dto = courseService.getCourse(id);
 		Course course = courseMapper.getCourse(dto);
@@ -120,7 +121,7 @@ public class CourseController {
                            BindingResult bindingResult, @Valid Model model) throws Exception {
 
 		if(bindingResult.hasErrors()) {
-			List<FacultyProfileDto> faculties = facultyService.getFaculties();
+			List<FacultyDto> faculties = facultyService.getFacultyList();
 			List<CourseDto> courses = courseService.getCourses();
 			model.addAttribute("prerequisites", courses.stream()
 					.map(c -> courseMapper.getCourse(c))

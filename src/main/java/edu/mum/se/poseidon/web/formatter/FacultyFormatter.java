@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import edu.mum.se.poseidon.web.mapper.FacultyMapper;
 import edu.mum.se.poseidon.web.models.FacultyModel;
 import edu.mum.se.poseidon.web.services.FacultyService;
+import edu.mum.se.poseidon.web.services.dto.FacultyDto;
 import edu.mum.se.poseidon.web.services.dto.FacultyProfileDto;
 
 @Component
@@ -35,7 +36,7 @@ public class FacultyFormatter implements Formatter<FacultyModel> {
 		// TODO Auto-generated method stub
 		long faculty_id = Long.valueOf(arg0);
 		try {
-			FacultyProfileDto dto = facultyService.getFaculty(faculty_id);
+			FacultyDto dto = facultyService.getAFaculty(faculty_id);
 			FacultyModel fm = facultyMapper.getFaculty(dto);
 			return fm;
 		} catch (Exception e) {
