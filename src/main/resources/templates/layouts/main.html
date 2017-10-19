@@ -97,7 +97,13 @@
                                     <i class="fa fa-user"></i> Profile
                                 </a>
                             </li>
-                            
+
+                            <li th:classappend="${#httpServletRequest.getRequestURI().contains('/student/schedule') ? 'active':''}">
+                                <a href="/student/schedule">
+                                    <i class="fa fa-calendar-o"></i> Schedule
+                                </a>
+                            </li>
+
                             <li th:classappend="${#httpServletRequest.getRequestURI().contains('/student/registeration') ? 'active':''}">
                                 <a href="/student/registeration">
                                     <i class="fa fa-calendar-o"></i> Registeration
@@ -111,6 +117,12 @@
 									<i class="fa fa-user"></i> Profile
 								</a>
 							</li>
+
+                            <li th:classappend="${#httpServletRequest.getRequestURI().contains('/faculty/schedule') ? 'active':''}">
+                                <a href="/faculty/schedule">
+                                    <i class="fa fa-calendar-o"></i> Schedule
+                                </a>
+                            </li>
 						</th:block>
 						
 						<!-- Other menus -->
