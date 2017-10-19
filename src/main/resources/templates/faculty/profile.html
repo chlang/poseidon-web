@@ -11,57 +11,81 @@
 </h1>
 <div layout:fragment="content">
     <div class="row">
-        <div class="col-lg-6">
-            <form action="#" th:action="@{'/faculty/' + ${faculty.id} + '/profile'}" th:object="${faculty}"
+    	<div class="col-lg-8">
+    		<form action="#" th:action="@{'/faculty/' + ${faculty.id} + '/profile'}" th:object="${faculty}"
                   method="POST">
-                <div class="form-group">
-                    <label>First Name</label>
-                    <input type="text" name="firstName" th:field="*{firstName}" class="form-control">
-                    <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">
-							First Name Error
-						</span>
-                </div>
-                <div class="form-group">
-                    <label>Last Name</label>
-                    <input type="text" name="lastName" th:field="*{lastName}" class="form-control">
-                    <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">
-							Last Name Error
-						</span>
-                </div>
-                <div class="form-group">
-                    <label>Username</label>
-                    <input type="text" name="username" th:field="*{username}" class="form-control">
-                    <span th:if="${#fields.hasErrors('username')}" class="text-danger" th:errors="*{username}">
-							Username Error
-						</span>
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="text" name="password" th:field="*{password}" class="form-control">
-                    <span th:if="${#fields.hasErrors('password')}" class="text-danger" th:errors="*{password}">
-							Password Error
-						</span>
-                </div>
-
-                <select id="courseList" th:field="*{courseList}" size="10" multiple="multiple">
-                    <option th:each="course : ${faculty.courseList}"
-                            th:value="${course.id}"
-                            th:text="${course.name} + ' ' + ${course.number}">
-                        Cinema
-                    </option>
-                </select>
-
-                <!--<div class="form-group" th:each="course : ${faculty.courseList}">-->
-                    <!--<input type="checkbox" th:id="${{course.name}}" th:value="${{course.name}}" th:field="*{courseList}" />-->
-                    <!--<label th:for="${{course}}" th:text="${course.name} + ' ' + ${course.number}">Cinema</label>-->
-                <!--</div>-->
-
-                <div class="form-group">
-                    <button type="submit" class="btn btn-success">Update</button>
-                </div>
-            </form>
-        </div>
-        <div class="col-lg-6"></div>
+        		<div class="row">
+        			<div class="col-lg-6">
+        				<div class="form-group">
+		                    <label>First Name</label>
+		                    <input type="text" name="firstName" th:field="*{firstName}" class="form-control">
+		                    <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">
+								First Name Error
+							</span>
+		                </div>
+        			</div>
+        			<div class="col-lg-6">
+        				<div class="form-group">
+		                    <label>Last Name</label>
+		                    <input type="text" name="lastName" th:field="*{lastName}" class="form-control">
+		                    <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">
+								Last Name Error
+							</span>
+		                </div>
+        			</div>
+        		</div>
+        		<div class="row">
+        			<div class="col-lg-6">
+        				<div class="form-group">
+		                    <label>Username</label>
+		                    <input type="text" name="username" th:field="*{username}" class="form-control">
+		                    <span th:if="${#fields.hasErrors('username')}" class="text-danger" th:errors="*{username}">
+								Username Error
+							</span>
+		                </div>
+        			</div>
+        			<div class="col-lg-6">
+        				<div class="form-group">
+		                    <label>Password</label>
+		                    <input type="text" name="password" th:field="*{password}" class="form-control">
+		                    <span th:if="${#fields.hasErrors('password')}" class="text-danger" th:errors="*{password}">
+								Password Error
+							</span>
+		                </div>
+        			</div>
+        		</div>
+        		<div class="row">
+        			<div class="col-lg-12">
+        				<div class="panel panel-primary">
+							<div class="panel-heading">Courses</div>
+					  		<div class="panel-body">
+					    		<table class="table table-stripped">
+					    			<tr>
+					    				<th>
+					    					Name
+					    				</th>
+					    				<th>
+					    					Number
+					    				</th>
+					    				<th>
+					    					Action
+					    				</th>
+				    				</tr>
+				    				<tbody>
+				    					<tr>
+				    					
+				    					</tr>
+				    				</tbody>
+			    				</table>
+		    				</div>
+		   				</div>
+        			</div>
+        		</div>
+        		<div class="form-group">
+        			<button type="submit" class="btn btn-success">Update</button>
+        		</div>
+        	</form>
+       	</div>
     </div>
 
 </div>
