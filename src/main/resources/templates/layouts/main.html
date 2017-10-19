@@ -33,11 +33,6 @@
 	              			</a>
 			              	<ul class="dropdown-menu">
 			                	<li>
-			                		<a href="#">
-			                			<i class="fa fa-user"></i> Profile
-		                			</a>
-	                			</li>
-			                	<li>
 			                		<a th:href="@{/logout}">
 			                			<i class="fa fa-power-off"></i> logout
 		                			</a>
@@ -95,23 +90,29 @@
                                 </a>
                             </li>
 						</th:block>
-
+						
                         <th:block th:if="${#httpServletRequest.isUserInRole('STUDENT')}">
-                            <li th:classappend="${#httpServletRequest.getRequestURI().contains('/students/{id}/profile(id=${user.id})') ? 'active':''}">
+                            <li th:classappend="${#httpServletRequest.getRequestURI().contains('/student/profile') ? 'active':''}">
                                 <a href="/student/profile">
                                     <i class="fa fa-user"></i> Profile
+                                </a>
+                            </li>
+                            
+                            <li th:classappend="${#httpServletRequest.getRequestURI().contains('/student/registeration') ? 'active':''}">
+                                <a href="/student/registeration">
+                                    <i class="fa fa-calendar-o"></i> Registeration
                                 </a>
                             </li>
                         </th:block>
 
 						<th:block th:if="${#httpServletRequest.isUserInRole('FACULTY')}">
-							<li th:classappend="${#httpServletRequest.getRequestURI().contains('/faculties/{id}/profile') ? 'active':''}">
+							<li th:classappend="${#httpServletRequest.getRequestURI().contains('/faculty/profile') ? 'active':''}">
                                 <a href="/faculty/profile">
 									<i class="fa fa-user"></i> Profile
 								</a>
 							</li>
 						</th:block>
-
+						
 						<!-- Other menus -->
 					</ul>
 				</div>

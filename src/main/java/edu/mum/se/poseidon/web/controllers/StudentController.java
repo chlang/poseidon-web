@@ -63,4 +63,10 @@ public class StudentController {
             return "error";
         }
     }
+    
+    @RequestMapping(path = "student/registeration", method = RequestMethod.GET)
+    public String registeration(Model model) {
+    	
+    	return "student/registeration";
+    }
 }
