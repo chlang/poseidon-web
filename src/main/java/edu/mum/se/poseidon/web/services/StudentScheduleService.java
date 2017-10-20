@@ -1,6 +1,7 @@
 package edu.mum.se.poseidon.web.services;
 
 import edu.mum.se.poseidon.web.Config;
+import edu.mum.se.poseidon.web.services.dto.StudentScheduleDto;
 import edu.mum.se.poseidon.web.services.dto.StudentSectionDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,12 +26,12 @@ public class StudentScheduleService {
         this.config = config;
     }
 
-    public List<StudentSectionDto> getStudentSchedule(long studentId) {
+    public StudentScheduleDto getStudentSchedule(long studentId) {
         String url = config.getBaseUrl() + servicePath + "/{studentId}/schedule";
-        ResponseEntity<StudentSectionDto[]> response = restTemplate.getForEntity(url, StudentSectionDto[].class, studentId);
+        ResponseEntity<StudentScheduleDto> response = restTemplate.getForEntity(url, StudentScheduleDto.class, studentId);
         if ( HttpStatus.OK != response.getStatusCode() ) {
             throw new RuntimeException("Some error occured: " + response.getStatusCodeValue());
         }
-        return Arrays.asList(response.getBody());
+        return response.getBody();
     }
 }

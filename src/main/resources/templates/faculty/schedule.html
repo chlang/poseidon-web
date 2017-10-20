@@ -13,167 +13,44 @@
         <div class="col-lg-8">
             <form action="#">
                 <!-- BLOCK START -->
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Block 1</div>
+                <div class="panel panel-primary" th:each="entry : ${entries}">
+                    <div class="panel-heading">Entry <div th:text="${entry.entryName}"></div></div>
                     <div class="panel-body">
-                        <table class="table table-stripped">
+                        <table class="table table-stripped" width="100%">
                             <tr>
-                                <th>
+                                <th width="20%">
                                     Course name
                                 </th>
-                                <th>
-                                    Faculty
+                                <th width="20%">
+                                    Block name
                                 </th>
-                                <th>
+                                <th width="15%">
                                     Start date
                                 </th>
-                                <th>
+                                <th width="15%">
                                     End date
                                 </th>
-                                <th>
-                                    Action
+                                <th width="15%">
+                                    Seats
+                                </th>
+                                <th width="15%">
+                                    Location
                                 </th>
                             </tr>
                             <tbody>
-                            <tr>
-                                <td>
-                                    Algorithm 435
-                                </td>
-                                <td>
-                                    Steve Nolle
-                                </td>
-                                <td>
-                                    10/10/2017
-                                </td>
-                                <td>
-                                    11/10/2017
-                                </td>
-                                <td>
-                                    <input type="radio" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Algorithm 435
-                                </td>
-                                <td>
-                                    Steve Nolle
-                                </td>
-                                <td>
-                                    10/10/2017
-                                </td>
-                                <td>
-                                    11/10/2017
-                                </td>
-                                <td>
-                                    <input type="radio" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Algorithm 435
-                                </td>
-                                <td>
-                                    Steve Nolle
-                                </td>
-                                <td>
-                                    10/10/2017
-                                </td>
-                                <td>
-                                    11/10/2017
-                                </td>
-                                <td>
-                                    <input type="radio" />
-                                </td>
+                            <tr th:each="section : ${entry.sectionModelList}">
+                                <td th:text="${section.courseFullName}"></td>
+                                <td th:text="${section.blockName}"></td>
+                                <td th:text="${section.startDate}"></td>
+                                <td th:text="${section.endDate}"></td>
+                                <td th:text="${section.maxSeats}"></td>
+                                <td th:text="${section.location}"></td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <!-- BLOCK END -->
-                <!-- BLOCK START -->
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Block 2</div>
-                    <div class="panel-body">
-                        <table class="table table-stripped">
-                            <tr>
-                                <th>
-                                    Course name
-                                </th>
-                                <th>
-                                    Faculty
-                                </th>
-                                <th>
-                                    Start date
-                                </th>
-                                <th>
-                                    End date
-                                </th>
-                                <th>
-                                    Action
-                                </th>
-                            </tr>
-                            <tbody>
-                            <tr>
-                                <td>
-                                    Algorithm 435
-                                </td>
-                                <td>
-                                    Steve Nolle
-                                </td>
-                                <td>
-                                    10/10/2017
-                                </td>
-                                <td>
-                                    11/10/2017
-                                </td>
-                                <td>
-                                    <input type="radio" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Algorithm 435
-                                </td>
-                                <td>
-                                    Steve Nolle
-                                </td>
-                                <td>
-                                    10/10/2017
-                                </td>
-                                <td>
-                                    11/10/2017
-                                </td>
-                                <td>
-                                    <input type="radio" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Algorithm 435
-                                </td>
-                                <td>
-                                    Steve Nolle
-                                </td>
-                                <td>
-                                    10/10/2017
-                                </td>
-                                <td>
-                                    11/10/2017
-                                </td>
-                                <td>
-                                    <input type="radio" />
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <!-- BLOCK END -->
-                <div class="form-group">
-                    <button type="submit" class="btn btn-success pull-right">
-                        Save
-                    </button>
                 </div>
             </form>
         </div>

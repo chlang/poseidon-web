@@ -1,8 +1,10 @@
 package edu.mum.se.poseidon.web.mapper;
 
+import edu.mum.se.poseidon.web.models.AdminSectionModel;
 import edu.mum.se.poseidon.web.models.FacultySectionModel;
 import edu.mum.se.poseidon.web.models.SectionModel;
 import edu.mum.se.poseidon.web.models.StudentSectionModel;
+import edu.mum.se.poseidon.web.services.dto.AdminSectionDto;
 import edu.mum.se.poseidon.web.services.dto.FacultySectionDto;
 import edu.mum.se.poseidon.web.services.dto.SectionDto;
 import edu.mum.se.poseidon.web.services.dto.StudentSectionDto;
@@ -84,7 +86,7 @@ public class SectionMapper {
         sectionModel4.setLocation("Verill Hall 143");
         sectionModel4.setCourseFullName("Boxing 580");
 
-        return Arrays.asList();
+        return Arrays.asList(sectionModel1, sectionModel2, sectionModel3, sectionModel4);
     }
 
     public List<StudentSectionModel> getStudentSectionModelList(List<StudentSectionDto> studentSectionDtoList) {
@@ -142,6 +144,37 @@ public class SectionMapper {
         sectionModel.setStartDate(facultySectionDto.getStartDate());
         sectionModel.setCourseFullName(facultySectionDto.getCourseName()
                 + " " + facultySectionDto.getCourseNumber());
+
+        return sectionModel;
+    }
+
+    public List<AdminSectionModel> getAdminSectionModelList(List<AdminSectionDto> adminSectionDtoList) {
+        if(adminSectionDtoList == null) {
+            return null;
+        }
+
+        return adminSectionDtoList.stream()
+                .map(dto -> getAdminSectionModel(dto))
+                .filter(model -> model != null)
+                .collect(Collectors.toList());
+    }
+
+    public AdminSectionModel getAdminSectionModel(AdminSectionDto adminSectionDto) {
+        if(adminSectionDto == null) {
+            return null;
+        }
+
+        AdminSectionModel sectionModel = new AdminSectionModel();
+        sectionModel.setBlockName(adminSectionDto.getBlockName());
+        sectionModel.setEndDate(adminSectionDto.getEndDate());
+        sectionModel.setId(adminSectionDto.getId());
+        sectionModel.setLocation(adminSectionDto.getLocation());
+        sectionModel.setMaxSeats(adminSectionDto.getMaxSeats());
+        sectionModel.setStartDate(adminSectionDto.getStartDate());
+        sectionModel.setFacultyFullName(adminSectionDto.getFacultyFirstName()
+                + " " + adminSectionDto.getFacultyLastName());
+        sectionModel.setCourseFullName(adminSectionDto.getCourseName()
+                + " " + adminSectionDto.getCourseNumber());
 
         return sectionModel;
     }

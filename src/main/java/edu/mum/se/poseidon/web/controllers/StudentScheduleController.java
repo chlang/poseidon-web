@@ -4,6 +4,7 @@ import edu.mum.se.poseidon.web.CustomAuthUser;
 import edu.mum.se.poseidon.web.mapper.SectionMapper;
 import edu.mum.se.poseidon.web.models.StudentSectionModel;
 import edu.mum.se.poseidon.web.services.StudentScheduleService;
+import edu.mum.se.poseidon.web.services.dto.StudentScheduleDto;
 import edu.mum.se.poseidon.web.services.dto.StudentSectionDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -32,12 +33,16 @@ public class StudentScheduleController {
         try {
             CustomAuthUser user = (CustomAuthUser) authentication.getPrincipal();
 
-            List<StudentSectionDto> studentSectionDtoList
+            StudentScheduleDto studentScheduleDto
                     = studentScheduleService.getStudentSchedule(user.getId());
 
-//            List<StudentSectionModel> sectionModelList = sectionMapper.getStudentSectionModelList(studentSectionDtoList);
-            List<StudentSectionModel> sectionModelList = sectionMapper.getStudentSectionModelSTUBList();
+            List<StudentSectionModel> sectionModelList
+                    = sectionMapper.getStudentSectionModelList(studentScheduleDto.getStudentSectionDtoList());
 
+            // STUB!
+//            List<StudentSectionModel> sectionModelList = sectionMapper.getStudentSectionModelSTUBList();
+
+            model.addAttribute("entryName", studentScheduleDto.getEntryName());
             model.addAttribute("sections", sectionModelList);
             return "student/schedule";
         } catch(Exception e) {
