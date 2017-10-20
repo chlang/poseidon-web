@@ -78,13 +78,13 @@
 								</a>
 							</li>
 							
-							<li th:classappend="${#httpServletRequest.getRequestURI().contains('/admin/schedule') ? 'active':''}">
+							<li th:classappend="${#httpServletRequest.getRequestURI().equals('/admin/schedule') ? 'active':''}">
 								<a href="/admin/schedule">
 									<i class="fa fa-calendar"></i> Schedule
 								</a>
 							</li>
 
-                            <li th:classappend="${#httpServletRequest.getRequestURI().contains('/admin/scheduleview') ? 'active':''}">
+                            <li th:classappend="${#httpServletRequest.getRequestURI().equals('/admin/scheduleview') ? 'active':''}">
                                 <a href="/admin/scheduleview">
                                     <i class="fa fa-calendar"></i> View Schedule
                                 </a>
