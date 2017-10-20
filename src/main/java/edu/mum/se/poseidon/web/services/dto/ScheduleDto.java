@@ -1,14 +1,26 @@
 package edu.mum.se.poseidon.web.services.dto;
 
+import edu.mum.se.poseidon.web.services.dto.Schedule.BlockTrack;
+import edu.mum.se.poseidon.web.services.dto.Schedule.Track;
+
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 public class ScheduleDto {
     private Long id;
     private String name;
     private int status;
-    private LocalDate created;
     private List<SectionDto> sections;
+    private Map<Track, List<BlockTrack>> map;
+
+    public Map<Track, List<BlockTrack>> getMap() {
+        return map;
+    }
+
+    public void setMap(Map<Track, List<BlockTrack>> map) {
+        this.map = map;
+    }
 
     public String getName() {
         return name;
@@ -40,14 +52,6 @@ public class ScheduleDto {
 
     public void setSections(List<SectionDto> sections) {
         this.sections = sections;
-    }
-
-    public LocalDate getCreated() {
-        return created;
-    }
-
-    public void setCreated(LocalDate created) {
-        this.created = created;
     }
 }
 

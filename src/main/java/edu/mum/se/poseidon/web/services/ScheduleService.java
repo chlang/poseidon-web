@@ -61,7 +61,7 @@ public class ScheduleService {
         url = config.getBaseUrl() + "/schedules/edit";
 
         HttpEntity<ScheduleDto> entity = new HttpEntity<ScheduleDto>(scheduleDto);
-        ResponseEntity<ScheduleDto> response = restTemplate.exchange(url, HttpMethod.POST, entity, ScheduleDto.class);
+        ResponseEntity<ScheduleDto> response = restTemplate.postForEntity(url, entity, ScheduleDto.class);
 
         if (response.getStatusCode() != HttpStatus.OK) {
             throw new Exception("Some error occured: " + response.getStatusCodeValue());
@@ -73,7 +73,7 @@ public class ScheduleService {
     public ScheduleDto create(ScheduleDto dto) throws Exception {
         url = config.getBaseUrl() + "/schedules/create";
         HttpEntity<ScheduleDto> entity = new HttpEntity<ScheduleDto>(dto);
-        ResponseEntity<ScheduleDto> response = restTemplate.exchange(url, HttpMethod.POST, entity, ScheduleDto.class);
+        ResponseEntity<ScheduleDto> response = restTemplate.postForEntity(url, entity, ScheduleDto.class);
 
         if (response.getStatusCode() != HttpStatus.OK) {
             throw new Exception("Some error occured: " + response.getStatusCodeValue());
@@ -82,14 +82,15 @@ public class ScheduleService {
     }
 
     // Generates Schedule
-    public  ScheduleGenerateDto generate(ScheduleGenerateDto dto)throws  Exception{
+    public  ScheduleDto generate(ScheduleGenerateDto dto)throws  Exception{
         url = config.getBaseUrl() + "schedules/generate";
         HttpEntity<ScheduleGenerateDto> entity = new HttpEntity<ScheduleGenerateDto>(dto);
-        ResponseEntity<ScheduleGenerateDto> response = restTemplate.exchange(url, HttpMethod.POST, entity, ScheduleGenerateDto.class);
+
+        ResponseEntity<?> response = restTemplate.postForEntity(url, entity, ScheduleGenerateDto.class);
 
         if(response.getStatusCode() != HttpStatus.OK)
             throw new Exception("Some error occured: " + response.getStatusCodeValue());
 
-        return response.getBody();
+        return (ScheduleDto)response.getBody();
     }
 }

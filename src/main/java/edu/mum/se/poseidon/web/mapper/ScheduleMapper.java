@@ -5,6 +5,9 @@ import edu.mum.se.poseidon.web.models.schedule.ScheduleModel;
 import edu.mum.se.poseidon.web.models.schedule.ScheduleStatus;
 import edu.mum.se.poseidon.web.services.dto.ScheduleDto;
 import org.springframework.stereotype.Component;
+import sun.util.resources.LocaleData;
+
+import java.time.LocalDate;
 
 @Component
 public class ScheduleMapper {
@@ -14,7 +17,7 @@ public class ScheduleMapper {
         ScheduleModel model = new ScheduleModel();
 
         model.setDisplayName(dto.getName());
-        model.setGeneratedDate(dto.getCreated());
+        model.setGeneratedDate(LocalDate.now());
         model.setId(dto.getId());
         model.setSections(dto.getSections());
 
