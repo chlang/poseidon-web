@@ -107,6 +107,3 @@ table {
     table-layout: fixed;
     width: 100px;
 }
-table tr th:nth-child(1){
-	width: 5%;
-}
