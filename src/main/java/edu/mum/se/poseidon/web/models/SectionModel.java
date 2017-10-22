@@ -9,11 +9,20 @@ public class SectionModel {
     private Integer maxSeats;
     @NotNull
     private String location;
+    private String name;
     private String startDate;
     private String endDate;
     private String blockName;
     private String facultyFirstName;
     private String facultyLastName;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Long getId() {
         return id;

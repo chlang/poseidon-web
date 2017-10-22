@@ -17,6 +17,9 @@
                     #
                 </th>
                 <th>
+                    Course name
+                </th>
+                <th>
                     Start date
                 </th>
                 <th>
@@ -42,6 +45,7 @@
             <th:block th:each="section, iter : ${sections}">
                 <tr>
                     <td th:text="${iter.index + 1}"></td>
+                    <td th:text="${section.name}"></td>
                     <td th:text="${section.startDate}"></td>
                     <td th:text="${section.endDate}"></td>
                     <td th:text="${section.maxSeats}"></td>

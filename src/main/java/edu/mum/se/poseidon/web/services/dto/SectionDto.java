@@ -10,6 +10,15 @@ public class SectionDto {
     private String blockName;
     private String facultyFirstName;
     private String facultyLastName;
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Long getId() {
         return id;

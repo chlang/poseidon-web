@@ -90,7 +90,7 @@ public class SectionMapper {
     }
 
     public List<StudentSectionModel> getStudentSectionModelList(List<StudentSectionDto> studentSectionDtoList) {
-        if(studentSectionDtoList == null) {
+        if (studentSectionDtoList == null) {
             return null;
         }
 
@@ -101,7 +101,7 @@ public class SectionMapper {
     }
 
     public StudentSectionModel getStudentSectionModel(StudentSectionDto studentSectionDto) {
-        if(studentSectionDto == null) {
+        if (studentSectionDto == null) {
             return null;
         }
 
@@ -120,7 +120,7 @@ public class SectionMapper {
     }
 
     public List<FacultySectionModel> getFacultySectionModelList(List<FacultySectionDto> facultySectionDtoList) {
-        if(facultySectionDtoList == null) {
+        if (facultySectionDtoList == null) {
             return null;
         }
 
@@ -131,7 +131,7 @@ public class SectionMapper {
     }
 
     public FacultySectionModel getFacultySectionModel(FacultySectionDto facultySectionDto) {
-        if(facultySectionDto == null) {
+        if (facultySectionDto == null) {
             return null;
         }
 
@@ -149,7 +149,7 @@ public class SectionMapper {
     }
 
     public List<AdminSectionModel> getAdminSectionModelList(List<AdminSectionDto> adminSectionDtoList) {
-        if(adminSectionDtoList == null) {
+        if (adminSectionDtoList == null) {
             return null;
         }
 
@@ -160,7 +160,7 @@ public class SectionMapper {
     }
 
     public AdminSectionModel getAdminSectionModel(AdminSectionDto adminSectionDto) {
-        if(adminSectionDto == null) {
+        if (adminSectionDto == null) {
             return null;
         }
 
@@ -177,5 +177,19 @@ public class SectionMapper {
                 + " " + adminSectionDto.getCourseNumber());
 
         return sectionModel;
+    }
+
+    public List<SectionModel> getSectionModelListFrom(List<SectionDto> sectionDtoList) {
+        if (sectionDtoList == null) {
+            return null;
+        }
+        return sectionDtoList.stream().map(sd -> getSectionModelFrom(sd)).collect(Collectors.toList());
+    }
+
+    public List<SectionDto> getSectionDtoListFrom(List<SectionModel> sectionModelList) {
+        if (sectionModelList == null) {
+            return null;
+        }
+        return sectionModelList.stream().map(sm -> getSectionDtoFrom(sm)).collect(Collectors.toList());
     }
 }
