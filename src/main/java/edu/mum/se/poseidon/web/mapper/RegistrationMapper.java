@@ -29,7 +29,10 @@ public class RegistrationMapper {
             }
         }
         for (String key : hash.keySet()) {
-            registrationModel.add(new RegistrationModel(key, sectionMapper.getSectionModelListFrom(hash.get(key))));
+        	RegistrationModel rm = new RegistrationModel();
+        	rm.setName(key);
+        	rm.setSectionModelList(sectionMapper.getSectionModelListFrom(hash.get(key)));
+            registrationModel.add(rm);
         }
         return registrationModel;
     }

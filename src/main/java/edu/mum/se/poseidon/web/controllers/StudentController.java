@@ -7,6 +7,7 @@ import edu.mum.se.poseidon.web.models.StudentModel;
 import edu.mum.se.poseidon.web.services.StudentService;
 import edu.mum.se.poseidon.web.services.dto.StudentDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.validation.Valid;
 
 @Controller
+@PreAuthorize("hasRole('ROLE_STUDENT')")
 public class StudentController {
 
     private StudentService studentService;
@@ -62,11 +64,5 @@ public class StudentController {
             model.addAttribute("errorMessage", e.getMessage());
             return "error";
         }
-    }
-    
-    @RequestMapping(path = "student/registeration", method = RequestMethod.GET)
-    public String registeration(Model model) {
-    	
-    	return "student/registeration";
     }
 }

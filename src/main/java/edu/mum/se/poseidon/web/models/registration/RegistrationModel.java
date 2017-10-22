@@ -2,17 +2,13 @@ package edu.mum.se.poseidon.web.models.registration;
 
 import edu.mum.se.poseidon.web.models.SectionModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RegistrationModel {
 
     private String name;
-    private List<SectionModel> sectionModelList;
-
-    public RegistrationModel(String name, List<SectionModel> sectionModelList) {
-        this.name = name;
-        this.sectionModelList = sectionModelList;
-    }
+    private List<SectionModel> sectionModelList = new ArrayList<>();
 
     public String getName() {
         return name;

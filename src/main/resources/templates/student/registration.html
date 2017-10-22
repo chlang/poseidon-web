@@ -5,21 +5,21 @@
 	layout:decorate="~{layouts/main}">
 	<ol layout:fragment="breadcrumb" class="breadcrumb">
 		<li>Student</li>
-	  	<li class="active">Registeration</li>
+	  	<li class="active">Registration</li>
 	</ol>
-	<h1 layout:fragment="title">Registeration</h1>
+	<h1 layout:fragment="title">Registration</h1>
 	<div layout:fragment="content">
 		<div class="row">
-			<div class="col-lg-8">
-				<form action="#">
+			<div class="col-lg-12">
+				<form action="#" th:action="@{/student/registration}" method="POST">
 					<!-- BLOCK START -->
-					<div class="panel panel-primary">
-						<div class="panel-heading">Block 1</div>
+					<div th:each="rm : ${registrationModels}" class="panel panel-primary">
+						<div class="panel-heading" th:text="${rm.name}"></div>
 				  		<div class="panel-body">
 				    		<table class="table table-stripped">
 				    			<tr>
 				    				<th>
-				    					Course name
+				    					#
 				    				</th>
 				    				<th>
 				    					Faculty
@@ -31,138 +31,25 @@
 				    					End date
 				    				</th>
 				    				<th>
-				    					Action
-				    				</th>
-				    			</tr>
-				    			<tbody>
-				    				<tr>
-				    					<td>
-				    						Algorithm 435
-				    					</td>
-				    					<td>
-				    						Steve Nolle
-				    					</td>
-				    					<td>
-				    						10/10/2017
-				    					</td>
-				    					<td>
-				    						11/10/2017
-				    					</td>
-				    					<td>
-				    						<input type="checkbox" />
-				    					</td>
-				    				</tr>
-				    				<tr>
-				    					<td>
-				    						Algorithm 435
-				    					</td>
-				    					<td>
-				    						Steve Nolle
-				    					</td>
-				    					<td>
-				    						10/10/2017
-				    					</td>
-				    					<td>
-				    						11/10/2017
-				    					</td>
-				    					<td>
-				    						<input type="checkbox" />
-				    					</td>
-				    				</tr>
-				    				<tr>
-				    					<td>
-				    						Algorithm 435
-				    					</td>
-				    					<td>
-				    						Steve Nolle
-				    					</td>
-				    					<td>
-				    						10/10/2017
-				    					</td>
-				    					<td>
-				    						11/10/2017
-				    					</td>
-				    					<td>
-				    						<input type="checkbox" />
-				    					</td>
-				    				</tr>
-				    			</tbody>
-				    		</table>
-				  		</div>
-					</div>
-					<!-- BLOCK END -->
-					<!-- BLOCK START -->
-					<div class="panel panel-primary">
-						<div class="panel-heading">Block 2</div>
-				  		<div class="panel-body">
-				    		<table class="table table-stripped">
-				    			<tr>
-				    				<th>
-				    					Course name
+				    					Max seats
 				    				</th>
 				    				<th>
-				    					Faculty
-				    				</th>
-				    				<th>
-				    					Start date
-				    				</th>
-				    				<th>
-				    					End date
+				    					Location
 				    				</th>
 				    				<th>
 				    					Action
 				    				</th>
 				    			</tr>
 				    			<tbody>
-				    				<tr>
+				    				<tr th:each="sm, iter : ${rm.sectionModelList}">
+				    					<td th:text="${iter.index + 1}"></td>
+				    					<td th:text="${sm.facultyFirstName + '' + sm.facultyLastName}"></td>
+				    					<td th:text="${sm.startDate}"></td>
+				    					<td th:text="${sm.endDate}"></td>
+				    					<td th:text="${sm.maxSeats}"></td>
+				    					<td th:text="${sm.location}"></td>
 				    					<td>
-				    						Algorithm 435
-				    					</td>
-				    					<td>
-				    						Steve Nolle
-				    					</td>
-				    					<td>
-				    						10/10/2017
-				    					</td>
-				    					<td>
-				    						11/10/2017
-				    					</td>
-				    					<td>
-				    						<input type="checkbox" />
-				    					</td>
-				    				</tr>
-				    				<tr>
-				    					<td>
-				    						Algorithm 435
-				    					</td>
-				    					<td>
-				    						Steve Nolle
-				    					</td>
-				    					<td>
-				    						10/10/2017
-				    					</td>
-				    					<td>
-				    						11/10/2017
-				    					</td>
-				    					<td>
-				    						<input type="checkbox" />
-				    					</td>
-				    				</tr>
-				    				<tr>
-				    					<td>
-				    						Algorithm 435
-				    					</td>
-				    					<td>
-				    						Steve Nolle
-				    					</td>
-				    					<td>
-				    						10/10/2017
-				    					</td>
-				    					<td>
-				    						11/10/2017
-				    					</td>
-				    					<td>
-				    						<input type="checkbox" />
+				    						<input type="checkbox" name="sectionIds" th:value="${sm.id}"  />
 				    					</td>
 				    				</tr>
 				    			</tbody>
