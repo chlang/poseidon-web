@@ -46,6 +46,7 @@ public class SectionMapper {
         sectionModel.setLocation(sectionDto.getLocation());
         sectionModel.setMaxSeats(sectionDto.getMaxSeats());
         sectionModel.setStartDate(sectionDto.getStartDate());
+        sectionModel.setName(sectionDto.getName());
         return sectionModel;
     }
 
