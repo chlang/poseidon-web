@@ -21,7 +21,7 @@ public class ScheduleMapper {
         model.setId(dto.getId());
         model.setSections(dto.getSections());
 
-        ScheduleStatus status = dto.getStatus() == 1 ? ScheduleStatus.ACTIVE : ScheduleStatus.DRAFT;
+        ScheduleStatus status = ScheduleStatus.valueOf(dto.getStatus());
         model.setStatus(status);
 
         return  model;
@@ -42,7 +42,8 @@ public class ScheduleMapper {
     public ScheduleDto getScheduleDto(ScheduleEditModel model){
         ScheduleDto dto = new ScheduleDto();
         dto.setId(model.getId());
-        dto.setStatus(model.getStatus().getValue());
+        dto.setName(model.getDisplayName());
+        dto.setStatus(model.getStatus());
 
         return dto;
     }

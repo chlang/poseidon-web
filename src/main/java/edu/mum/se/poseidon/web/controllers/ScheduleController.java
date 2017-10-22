@@ -16,6 +16,7 @@ import edu.mum.se.poseidon.web.models.schedule.ScheduleModel;
 import edu.mum.se.poseidon.web.models.schedule.ScheduleStatus;
 import edu.mum.se.poseidon.web.services.EntryService;
 import edu.mum.se.poseidon.web.services.ScheduleService;
+import edu.mum.se.poseidon.web.services.dto.ScheduleDto;
 import edu.mum.se.poseidon.web.services.dto.ScheduleGenerateDto;
 import edu.mum.se.poseidon.web.services.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,7 @@ public class ScheduleController {
         this.entryService = entryService;
     }
 
+    // Index
     @RequestMapping(path = "/admin/schedule", method = RequestMethod.GET)
     public String index(Model model) throws Exception {
         List<ScheduleModel> sched = scheduleService.getSchedules()
@@ -71,6 +73,7 @@ public class ScheduleController {
         return "admin/schedule/index";
     }
 
+    // Generate
     @RequestMapping(path = "/admin/schedule/generate", method = RequestMethod.POST)
     public String generate(@ModelAttribute("scheduleCreateModel") @Valid ScheduleCreateModel schedule,
                            BindingResult bindingResult, @Valid Model model) throws Exception {
@@ -82,10 +85,13 @@ public class ScheduleController {
         return "redirect:/admin/schedule";
     }
 
+    // Edit
     @RequestMapping(path = "/admin/schedule/{id}/edit")
     public String edit(@PathVariable long id, Model model) throws Exception {
         ScheduleEditModel schedule = new ScheduleEditModel();
         schedule.setId(id);
+        schedule.setDisplayName(schedule.getDisplayName());
+
         model.addAttribute("scheduleEditModel", schedule);
         return "admin/schedule/edit";
     }
@@ -97,10 +103,12 @@ public class ScheduleController {
         if (bindingResult.hasErrors()) {
             return "admin/schedule/" + scheduleEditModel.getId() + "/edit";
         }
-        scheduleService.edit(scheduleMapper.getScheduleDto(scheduleEditModel));
+        ScheduleDto dto = scheduleMapper.getScheduleDto(scheduleEditModel);
+        scheduleService.edit(dto);
         return "redirect:/admin/schedule";
     }
 
+    // Delete
     @RequestMapping(path = "/admin/schedule/{id}/delete")
     public String delete(@PathVariable long id, Model model) throws Exception {
         scheduleService.delete(id);

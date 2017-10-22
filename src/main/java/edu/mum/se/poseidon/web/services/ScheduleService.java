@@ -52,7 +52,7 @@ public class ScheduleService {
 
     // Deletes Schedule by ScheduleId
     public void delete(long id) throws Exception {
-        url = config.getBaseUrl() + "/schedules/{id}";
+        url = config.getBaseUrl() + "/schedules/" + id;
         restTemplate.delete(url);
     }
 
@@ -82,15 +82,15 @@ public class ScheduleService {
     }
 
     // Generates Schedule
-    public  ScheduleDto generate(ScheduleGenerateDto dto)throws  Exception{
+    public ScheduleGenerateDto generate(ScheduleGenerateDto dto) throws Exception {
         url = config.getBaseUrl() + "schedules/generate";
         HttpEntity<ScheduleGenerateDto> entity = new HttpEntity<ScheduleGenerateDto>(dto);
 
-        ResponseEntity<?> response = restTemplate.postForEntity(url, entity, ScheduleGenerateDto.class);
+        ResponseEntity<ScheduleGenerateDto> response = restTemplate.postForEntity(url, entity, ScheduleGenerateDto.class);
 
-        if(response.getStatusCode() != HttpStatus.OK)
+        if (response.getStatusCode() != HttpStatus.OK)
             throw new Exception("Some error occured: " + response.getStatusCodeValue());
 
-        return (ScheduleDto)response.getBody();
+        return response.getBody();
     }
 }

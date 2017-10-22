@@ -24,9 +24,10 @@
 
                 <div class="form-group">
                     <label>Publish Status</label>
-                    <select class="form-control">
-                        <option value="Draft">In Draft</option>
-                        <option value="Active">Active</option>
+                    <select name="status" class="form-control" th:field="*{status}">
+                        <option value="0">In Draft</option>
+                        <option value="1">Active</option>
+                        <option value="2">In Review</option>
                     </select>
                 </div>
 
