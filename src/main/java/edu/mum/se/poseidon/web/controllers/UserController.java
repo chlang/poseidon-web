@@ -45,8 +45,16 @@ public class UserController {
     }
 
     @RequestMapping(path = "/admin/user", method = RequestMethod.GET)
-    public String index(Model model) throws Exception {
-        List<UserDto> users = userService.getUsers();
+    public String index(Model model) {
+        List<UserDto> users;
+		try {
+			users = userService.getUsers();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			model.addAttribute("errorMessage", e.getMessage());
+            return "error";
+		}
         model.addAttribute("users", users);
         return "admin/user/index";
     }
@@ -59,18 +67,33 @@ public class UserController {
 
     @RequestMapping(path = "/admin/user/create", method = RequestMethod.POST)
     public String createPOST(@ModelAttribute("user") @Valid User user,
-                             BindingResult bindingResult, @Valid Model model) throws Exception {
+                             BindingResult bindingResult, @Valid Model model){
 
         if (bindingResult.hasErrors()) {
             return "admin/user/create";
         }
-        userService.createUser(userMapper.getUserDto(user));
+        try {
+			userService.createUser(userMapper.getUserDto(user));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			model.addAttribute("errorMessage", e.getMessage());
+            return "error";
+		}
         return "redirect:/admin/user";
     }
 
     @RequestMapping(path = "/admin/user/{id}/edit")
-    public String edit(@PathVariable long id, Model model) throws Exception {
-        UserDto udo = userService.getUser(id);
+    public String edit(@PathVariable long id, Model model){
+        UserDto udo;
+		try {
+			udo = userService.getUser(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			model.addAttribute("errorMessage", e.getMessage());
+            return "error";
+		}
         User user = userMapper.getUser(udo);
         model.addAttribute("user", user);
         return "admin/user/edit";
@@ -78,12 +101,19 @@ public class UserController {
 
     @RequestMapping(path = "/admin/user/{id}/edit", method = RequestMethod.POST)
     public String editPOST(@ModelAttribute("user") @Valid User user,
-                           BindingResult bindingResult, @Valid Model model) throws Exception {
+                           BindingResult bindingResult, @Valid Model model) {
 
         if (bindingResult.hasErrors()) {
             return "admin/user/edit";
         }
-        userService.editUser(userMapper.getUserDto(user));
+        try {
+			userService.editUser(userMapper.getUserDto(user));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			model.addAttribute("errorMessage", e.getMessage());
+            return "error";
+		}
         return "redirect:/admin/user";
     }
 

@@ -8,9 +8,11 @@ import edu.mum.se.poseidon.web.services.dto.SectionDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,11 +21,12 @@ import java.util.List;
 
 
 @Controller
+@PreAuthorize("hasRole('ROLE_STUDENT')")
 public class StudentRegistrationController {
 
     private StudentRegistrationService studentRegistrationService;
     private RegistrationMapper registrationMapper;
-    private static final Logger logger = LoggerFactory.getLogger(SectionController.class);
+    private static final Logger logger = LoggerFactory.getLogger(StudentRegistrationController.class);
 
     @Autowired
     public StudentRegistrationController(StudentRegistrationService studentRegistrationService,
@@ -34,24 +37,40 @@ public class StudentRegistrationController {
 
     @RequestMapping(path = "/student/registration", method = RequestMethod.GET)
     public String index(Model model, Authentication authentication) throws Exception {
-    	CustomAuthUser user = (CustomAuthUser) authentication.getPrincipal();
-    	long studentId = user.getId();
-        List<SectionDto> sectionDtoList = studentRegistrationService.getAvailableSections(studentId);
-        List<RegistrationModel> registrationModelList = registrationMapper.getRegistrationModelFrom(sectionDtoList);
-        model.addAttribute("registrationModels", registrationModelList);
-        return "student/registration";
+    	try {
+	    	CustomAuthUser user = (CustomAuthUser) authentication.getPrincipal();
+	    	long studentId = user.getId();
+	        List<SectionDto> sectionDtoList = studentRegistrationService.getAvailableSections(studentId);
+	        List<RegistrationModel> registrationModelList = registrationMapper.getRegistrationModelFrom(sectionDtoList);
+	        model.addAttribute("registrationModels", registrationModelList);
+	        return "student/registration";
+    	}
+    	catch (Exception e) {
+    		e.printStackTrace();
+            model.addAttribute("errorMessage", e.getMessage());
+            return "error";
+    	}
     }
 
     @RequestMapping(path = "/student/registration", method = RequestMethod.POST)
-    public String registrationPOST(@RequestParam("sectionIds") List<String> sectionIds, 
-    			Model model, Authentication authentication) throws Exception {
+    public String registrationPOST(@RequestParam(value="sectionIds", required=false) List<String> sectionIds, 
+    			Model model, Authentication authentication) {
     	
-    	CustomAuthUser user = (CustomAuthUser) authentication.getPrincipal();
-    	long studentId = user.getId();
-    	for(String sectionId: sectionIds) {
-    		studentRegistrationService.registerToSection(studentId, Long.valueOf(sectionId));
+    	try {
+	    	CustomAuthUser user = (CustomAuthUser) authentication.getPrincipal();
+	    	long studentId = user.getId();
+	    	if(sectionIds != null) {
+		    	for(String sectionId: sectionIds) {
+		    		studentRegistrationService.registerToSection(studentId, Long.valueOf(sectionId));
+		    	}
+	    	}
+	        return "redirect:/student/registration";
     	}
-        return "redirect:/student/registration";
+    	catch (Exception e) {
+    		e.printStackTrace();
+            model.addAttribute("errorMessage", e.getMessage());
+            return "error";
+    	}
     }
 
 }

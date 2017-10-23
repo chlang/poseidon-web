@@ -52,15 +52,31 @@ public class BlockController {
     }
 
     @RequestMapping(path = "/admin/block", method = RequestMethod.GET)
-    public String index(Model model) throws Exception {
-        List<BlockDto> blocks = blockService.getBlocks();
+    public String index(Model model){
+        List<BlockDto> blocks;
+		try {
+			blocks = blockService.getBlocks();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			model.addAttribute("errorMessage", e.getMessage());
+            return "error";
+		}
         model.addAttribute("blocks", blocks);
         return "admin/block/index";
     }
 
     @RequestMapping(path = "/admin/block/create", method = RequestMethod.GET)
-    public String create(Model model) throws Exception {
-        List<EntryDto> edtos = entryService.getEntries();
+    public String create(Model model){
+        List<EntryDto> edtos;
+		try {
+			edtos = entryService.getEntries();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			model.addAttribute("errorMessage", e.getMessage());
+            return "error";
+		}
         List<EntryModel> entries = edtos.stream()
                 .map(e -> entryMapper.getEntryModelFrom(e))
                 .collect(Collectors.toList());
@@ -72,54 +88,83 @@ public class BlockController {
 
     @RequestMapping(path = "/admin/block/create", method = RequestMethod.POST)
     public String createPOST(@ModelAttribute("block") @Valid Block block,
-                             BindingResult bindingResult, @Valid Model model) throws Exception {
-        if (bindingResult.hasErrors()) {
-            List<EntryDto> edtos = entryService.getEntries();
-            List<EntryModel> entries = edtos.stream()
-                    .map(e -> entryMapper.getEntryModelFrom(e))
-                    .collect(Collectors.toList());
+                             BindingResult bindingResult, @Valid Model model) {
+    	try {
+    		if (bindingResult.hasErrors()) {
+                List<EntryDto> edtos = entryService.getEntries();
+                List<EntryModel> entries = edtos.stream()
+                        .map(e -> entryMapper.getEntryModelFrom(e))
+                        .collect(Collectors.toList());
 
-            model.addAttribute("entries", entries);
-            return "admin/block/create";
-        }
-        blockService.createBlock(blockMapper.getBlockDto(block));
-        return "redirect:/admin/block";
+                model.addAttribute("entries", entries);
+                return "admin/block/create";
+            }
+            blockService.createBlock(blockMapper.getBlockDto(block));
+            return "redirect:/admin/block";
+    	}
+    	catch (Exception e) {
+    		e.printStackTrace();
+			model.addAttribute("errorMessage", e.getMessage());
+            return "error";
+    	}
+        
     }
 
     @RequestMapping(path = "/admin/block/{id}/edit")
-    public String edit(@PathVariable long id, Model model) throws Exception {
-        BlockDto bdo = blockService.getBlock(id);
-        Block block = blockMapper.getBlock(bdo);
-        List<EntryDto> edtos = entryService.getEntries();
-        List<EntryModel> entries = edtos.stream()
-                .map(e -> entryMapper.getEntryModelFrom(e))
-                .collect(Collectors.toList());
-
-        model.addAttribute("entries", entries);
-        model.addAttribute("block", block);
-        return "admin/block/edit";
+    public String edit(@PathVariable long id, Model model) {
+    	try {
+	        BlockDto bdo = blockService.getBlock(id);
+	        Block block = blockMapper.getBlock(bdo);
+	        List<EntryDto> edtos = entryService.getEntries();
+	        List<EntryModel> entries = edtos.stream()
+	                .map(e -> entryMapper.getEntryModelFrom(e))
+	                .collect(Collectors.toList());
+	
+	        model.addAttribute("entries", entries);
+	        model.addAttribute("block", block);
+	        return "admin/block/edit";
+    	}
+    	catch (Exception e) {
+    		e.printStackTrace();
+			model.addAttribute("errorMessage", e.getMessage());
+            return "error";
+    	}
     }
 
     @RequestMapping(path = "/admin/block/{id}/edit", method = RequestMethod.POST)
     public String editPOST(@ModelAttribute("block") @Valid Block block,
                            BindingResult bindingResult, @Valid Model model) throws Exception {
 
-        if (bindingResult.hasErrors()) {
-            List<EntryDto> edtos = entryService.getEntries();
-            List<EntryModel> entries = edtos.stream()
-                    .map(e -> entryMapper.getEntryModelFrom(e))
-                    .collect(Collectors.toList());
-
-            model.addAttribute("entries", entries);
-            return "admin/block/edit";
-        }
-        blockService.editBlock(blockMapper.getBlockDto(block));
-        return "redirect:/admin/block";
+    	try {
+	        if (bindingResult.hasErrors()) {
+	            List<EntryDto> edtos = entryService.getEntries();
+	            List<EntryModel> entries = edtos.stream()
+	                    .map(e -> entryMapper.getEntryModelFrom(e))
+	                    .collect(Collectors.toList());
+	
+	            model.addAttribute("entries", entries);
+	            return "admin/block/edit";
+	        }
+	        blockService.editBlock(blockMapper.getBlockDto(block));
+	        return "redirect:/admin/block";
+    	}
+    	catch (Exception e) {
+    		e.printStackTrace();
+			model.addAttribute("errorMessage", e.getMessage());
+            return "error";
+    	}
     }
 
     @RequestMapping(path = "/admin/block/{id}/delete")
-    public String delete(@PathVariable long id, Model model) throws Exception {
-        blockService.deleteBlock(id);
+    public String delete(@PathVariable long id, Model model) {
+        try {
+			blockService.deleteBlock(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			model.addAttribute("errorMessage", e.getMessage());
+            return "error";
+		}
         return "redirect:/admin/block";
     }
 }
