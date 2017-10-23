@@ -53,37 +53,35 @@ public class BlockController {
 
     @RequestMapping(path = "/admin/block", method = RequestMethod.GET)
     public String index(Model model){
-        List<BlockDto> blocks;
 		try {
-			blocks = blockService.getBlocks();
+			List<BlockDto> blocks = blockService.getBlocks();
+	        model.addAttribute("blocks", blocks);
+	        return "admin/block/index";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			model.addAttribute("errorMessage", e.getMessage());
             return "error";
 		}
-        model.addAttribute("blocks", blocks);
-        return "admin/block/index";
     }
 
     @RequestMapping(path = "/admin/block/create", method = RequestMethod.GET)
     public String create(Model model){
-        List<EntryDto> edtos;
 		try {
-			edtos = entryService.getEntries();
+			List<EntryDto> edtos = entryService.getEntries();
+	        List<EntryModel> entries = edtos.stream()
+	                .map(e -> entryMapper.getEntryModelFrom(e))
+	                .collect(Collectors.toList());
+
+	        model.addAttribute("entries", entries);
+	        model.addAttribute("block", new Block());
+	        return "admin/block/create";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			model.addAttribute("errorMessage", e.getMessage());
             return "error";
 		}
-        List<EntryModel> entries = edtos.stream()
-                .map(e -> entryMapper.getEntryModelFrom(e))
-                .collect(Collectors.toList());
-
-        model.addAttribute("entries", entries);
-        model.addAttribute("block", new Block());
-        return "admin/block/create";
     }
 
     @RequestMapping(path = "/admin/block/create", method = RequestMethod.POST)
@@ -159,12 +157,12 @@ public class BlockController {
     public String delete(@PathVariable long id, Model model) {
         try {
 			blockService.deleteBlock(id);
+	        return "redirect:/admin/block";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			model.addAttribute("errorMessage", e.getMessage());
             return "error";
 		}
-        return "redirect:/admin/block";
     }
 }

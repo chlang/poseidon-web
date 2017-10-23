@@ -8,7 +8,7 @@ public class CourseDto {
 	private Long id;
 	private String name;
     private Integer number;
-    
+ 
     private List<PrerequisiteDto> prerequisites = new ArrayList<>();
     private List<FacultyDto> faculties = new ArrayList<>();
     

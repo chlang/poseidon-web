@@ -108,6 +108,7 @@ public class CourseController {
 			return "redirect:/admin/course";
 		}
 		catch (Exception e) {
+			e.printStackTrace();
 			model.addAttribute("errorMessage", e.getMessage());
 			return "error";
 		}
@@ -135,6 +136,7 @@ public class CourseController {
 			return "admin/course/edit";
 		}
 		catch (Exception e) {
+			e.printStackTrace();
 			model.addAttribute("errorMessage", e.getMessage());
 			return "error";
 		}
@@ -165,6 +167,7 @@ public class CourseController {
 			return "redirect:/admin/course";
 		}
 		catch (Exception e) {
+			e.printStackTrace();
 			model.addAttribute("errorMessage", e.getMessage());
 			return "error";
 		}
@@ -177,6 +180,7 @@ public class CourseController {
 	        return "redirect:/admin/course";
 		}
 		catch (Exception e) {
+			e.printStackTrace();
 			model.addAttribute("errorMessage", e.getMessage());
 			return "error";
 		}

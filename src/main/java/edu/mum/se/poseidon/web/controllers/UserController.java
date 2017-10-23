@@ -7,8 +7,6 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.client.RestTemplate;
 
 import edu.mum.se.poseidon.web.mapper.UserMapper;
 import edu.mum.se.poseidon.web.models.User;
@@ -46,17 +43,16 @@ public class UserController {
 
     @RequestMapping(path = "/admin/user", method = RequestMethod.GET)
     public String index(Model model) {
-        List<UserDto> users;
 		try {
-			users = userService.getUsers();
+			 List<UserDto> users = userService.getUsers();
+		     model.addAttribute("users", users);
+		     return "admin/user/index";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			model.addAttribute("errorMessage", e.getMessage());
             return "error";
 		}
-        model.addAttribute("users", users);
-        return "admin/user/index";
     }
 
     @RequestMapping(path = "/admin/user/create", method = RequestMethod.GET)
@@ -68,58 +64,63 @@ public class UserController {
     @RequestMapping(path = "/admin/user/create", method = RequestMethod.POST)
     public String createPOST(@ModelAttribute("user") @Valid User user,
                              BindingResult bindingResult, @Valid Model model){
-
-        if (bindingResult.hasErrors()) {
-            return "admin/user/create";
-        }
+        
         try {
+			if (bindingResult.hasErrors()) {
+	            return "admin/user/create";
+	        }
 			userService.createUser(userMapper.getUserDto(user));
+	        return "redirect:/admin/user";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			model.addAttribute("errorMessage", e.getMessage());
             return "error";
 		}
-        return "redirect:/admin/user";
     }
 
     @RequestMapping(path = "/admin/user/{id}/edit")
     public String edit(@PathVariable long id, Model model){
-        UserDto udo;
 		try {
-			udo = userService.getUser(id);
+			UserDto udo = userService.getUser(id);User user = userMapper.getUser(udo);
+	        model.addAttribute("user", user);
+	        return "admin/user/edit";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			model.addAttribute("errorMessage", e.getMessage());
             return "error";
 		}
-        User user = userMapper.getUser(udo);
-        model.addAttribute("user", user);
-        return "admin/user/edit";
     }
 
     @RequestMapping(path = "/admin/user/{id}/edit", method = RequestMethod.POST)
     public String editPOST(@ModelAttribute("user") @Valid User user,
                            BindingResult bindingResult, @Valid Model model) {
 
-        if (bindingResult.hasErrors()) {
-            return "admin/user/edit";
-        }
         try {
+        	if (bindingResult.hasErrors()) {
+                return "admin/user/edit";
+            }
 			userService.editUser(userMapper.getUserDto(user));
+	        return "redirect:/admin/user";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			model.addAttribute("errorMessage", e.getMessage());
             return "error";
 		}
-        return "redirect:/admin/user";
     }
 
     @RequestMapping(path = "/admin/user/{id}/delete")
-    public String delete(@PathVariable long id, Model model) throws Exception {
-        userService.deleteUser(id);
-        return "redirect:/admin/user";
+    public String delete(@PathVariable long id, Model model){
+    	try {
+    		userService.deleteUser(id);
+            return "redirect:/admin/user";
+    	} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			model.addAttribute("errorMessage", e.getMessage());
+            return "error";
+		}
     }
 }
