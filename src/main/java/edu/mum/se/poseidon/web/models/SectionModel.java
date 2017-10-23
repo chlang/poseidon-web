@@ -87,4 +87,10 @@ public class SectionModel {
     public void setFacultyLastName(String facultyLastName) {
         this.facultyLastName = facultyLastName;
     }
+
+    public String getFacultyName() {
+        if (facultyFirstName.equalsIgnoreCase("UNSTAFF"))
+            return facultyFirstName + facultyLastName;
+        return facultyFirstName + " " + facultyLastName;
+    }
 }

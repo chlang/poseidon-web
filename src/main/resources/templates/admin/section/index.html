@@ -26,7 +26,7 @@
                     End date
                 </th>
                 <th>
-                    Max number of seat
+                    Capacity
                 </th>
                 <th>
                     Block's name
@@ -35,10 +35,7 @@
                     Location
                 </th>
                 <th>
-                    Faculty's firstname
-                </th>
-                <th>
-                    Faculty's lastname
+                    Faculty
                 </th>
             </tr>
             <tbody id="section-list">
@@ -51,8 +48,8 @@
                     <td th:text="${section.maxSeats}"></td>
                     <td th:text="${section.blockName}"></td>
                     <td th:text="${section.location}"></td>
-                    <td th:text="${section.facultyFirstName}"></td>
-                    <td th:text="${section.facultyLastName}"></td>
+                    <td th:text="${section.facultyName}"></td>
+                    <!--<td th:text="${section.facultyLastName}"></td>-->
                     <td align="center">
                         <div class="btn-group">
                             <a th:href="@{'/admin/section/edit/' + ${section.id}}" class="btn btn-primary" title="edit">
