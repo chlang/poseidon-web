@@ -53,96 +53,132 @@ public class CourseController {
 	}
 	
 	@RequestMapping(path = "/admin/course", method = RequestMethod.GET)
-	public String index(Model model) throws Exception {
-		List<CourseDto> dtos = courseService.getCourses();
-		model.addAttribute("courses", dtos.stream()
-				.map(c -> courseMapper.getCourse(c))
-				.collect(Collectors.toList()));
-		return "admin/course/index";
+	public String index(Model model){
+		try {
+			List<CourseDto> dtos = courseService.getCourses();
+			model.addAttribute("courses", dtos.stream()
+					.map(c -> courseMapper.getCourse(c))
+					.collect(Collectors.toList()));
+			return "admin/course/index";
+		}
+		catch (Exception e) {
+			model.addAttribute("errorMessage", e.getMessage());
+			return "error";
+		}
+		
 	}
 	
 	@RequestMapping(path = "/admin/course/create", method = RequestMethod.GET)
 	public String create(Model model) throws Exception {
-		List<FacultyDto> faculties = facultyService.getFacultyList();
-		List<CourseDto> courses = courseService.getCourses();
-		model.addAttribute("course", new Course());
-		model.addAttribute("faculties", faculties.stream()
-				.map(f -> facultyMapper.getFaculty(f))
-				.collect(Collectors.toList()));
-		model.addAttribute("prerequisites", courses.stream()
-				.map(c -> courseMapper.getCourse(c))
-				.collect(Collectors.toList()));
-		return "admin/course/create";
+		try {
+			List<FacultyDto> faculties = facultyService.getFacultyList();
+			List<CourseDto> courses = courseService.getCourses();
+			model.addAttribute("course", new Course());
+			model.addAttribute("faculties", faculties.stream()
+					.map(f -> facultyMapper.getFaculty(f))
+					.collect(Collectors.toList()));
+			model.addAttribute("prerequisites", courses.stream()
+					.map(c -> courseMapper.getCourse(c))
+					.collect(Collectors.toList()));
+			return "admin/course/create";
+		}
+		catch (Exception e) {
+			model.addAttribute("errorMessage", e.getMessage());
+			return "error";
+		}
 	}
 	
 	@RequestMapping(path = "/admin/course/create", method = RequestMethod.POST)
 	public String createPOST(@ModelAttribute("course") @Valid Course course,
-            BindingResult bindingResult, @Valid Model model) throws Exception {
+            BindingResult bindingResult, @Valid Model model){
 		
-
-		if(bindingResult.hasErrors()) {
-			List<FacultyDto> faculties = facultyService.getFacultyList();
-			List<CourseDto> courses = courseService.getCourses();
-			model.addAttribute("prerequisites", courses.stream()
-					.map(c -> courseMapper.getCourse(c))
-					.collect(Collectors.toList()));
-			model.addAttribute("faculties", faculties.stream()
-					.map(f -> facultyMapper.getFaculty(f))
-					.collect(Collectors.toList()));
-			return "admin/course/create";
+		try {
+			if(bindingResult.hasErrors()) {
+				List<FacultyDto> faculties = facultyService.getFacultyList();
+				List<CourseDto> courses = courseService.getCourses();
+				model.addAttribute("prerequisites", courses.stream()
+						.map(c -> courseMapper.getCourse(c))
+						.collect(Collectors.toList()));
+				model.addAttribute("faculties", faculties.stream()
+						.map(f -> facultyMapper.getFaculty(f))
+						.collect(Collectors.toList()));
+				return "admin/course/create";
+			}
+			courseService.createCourse(courseMapper.getCourseDto(course));
+			return "redirect:/admin/course";
 		}
-		courseService.createCourse(courseMapper.getCourseDto(course));
-		return "redirect:/admin/course";
+		catch (Exception e) {
+			model.addAttribute("errorMessage", e.getMessage());
+			return "error";
+		}
 	}
 	
 	@RequestMapping(path = "/admin/course/{id}/edit")
-    public String edit(@PathVariable long id, Model model) throws Exception {
-		List<FacultyDto> faculties = facultyService.getFacultyList();
-		List<CourseDto> courses = courseService.getCourses();
-		CourseDto dto = courseService.getCourse(id);
-		Course course = courseMapper.getCourse(dto);
-		model.addAttribute("faculties", faculties.stream()
-				.map(f -> facultyMapper.getFaculty(f))
-				.collect(Collectors.toList()));
-		model.addAttribute("prerequisites", courses.stream()
-				.map(c -> courseMapper.getCourse(c))
-				.filter(c -> c.getId() != course.getId())
-				.collect(Collectors.toList()));
-		model.addAttribute("course", course);
-		model.addAttribute("selectedPrerequisites", course.getPrerequisites().stream()
-				.map(Course::getId).collect(Collectors.toList()));
-		model.addAttribute("selectedFaculties", course.getFaculties().stream()
-				.map(FacultyModel::getId).collect(Collectors.toList()));
-		return "admin/course/edit";
-	}
-	
-	@RequestMapping(path = "/admin/course/{id}/edit", method = RequestMethod.POST)
-    public String editPOST(@ModelAttribute("course") @Valid Course course,
-                           BindingResult bindingResult, @Valid Model model) throws Exception {
-
-		if(bindingResult.hasErrors()) {
+    public String edit(@PathVariable long id, Model model){
+		try {
 			List<FacultyDto> faculties = facultyService.getFacultyList();
 			List<CourseDto> courses = courseService.getCourses();
+			CourseDto dto = courseService.getCourse(id);
+			Course course = courseMapper.getCourse(dto);
+			model.addAttribute("faculties", faculties.stream()
+					.map(f -> facultyMapper.getFaculty(f))
+					.collect(Collectors.toList()));
 			model.addAttribute("prerequisites", courses.stream()
 					.map(c -> courseMapper.getCourse(c))
 					.filter(c -> c.getId() != course.getId())
 					.collect(Collectors.toList()));
-			model.addAttribute("faculties", faculties.stream()
-					.map(f -> facultyMapper.getFaculty(f))
-					.collect(Collectors.toList()));
+			model.addAttribute("course", course);
 			model.addAttribute("selectedPrerequisites", course.getPrerequisites().stream()
 					.map(Course::getId).collect(Collectors.toList()));
 			model.addAttribute("selectedFaculties", course.getFaculties().stream()
 					.map(FacultyModel::getId).collect(Collectors.toList()));
 			return "admin/course/edit";
 		}
-		courseService.editCourse(courseMapper.getCourseDto(course));
-		return "redirect:/admin/course";
+		catch (Exception e) {
+			model.addAttribute("errorMessage", e.getMessage());
+			return "error";
+		}
+	}
+	
+	@RequestMapping(path = "/admin/course/{id}/edit", method = RequestMethod.POST)
+    public String editPOST(@ModelAttribute("course") @Valid Course course,
+                           BindingResult bindingResult, @Valid Model model) {
+		
+		try {
+			if(bindingResult.hasErrors()) {
+				List<FacultyDto> faculties = facultyService.getFacultyList();
+				List<CourseDto> courses = courseService.getCourses();
+				model.addAttribute("prerequisites", courses.stream()
+						.map(c -> courseMapper.getCourse(c))
+						.filter(c -> c.getId() != course.getId())
+						.collect(Collectors.toList()));
+				model.addAttribute("faculties", faculties.stream()
+						.map(f -> facultyMapper.getFaculty(f))
+						.collect(Collectors.toList()));
+				model.addAttribute("selectedPrerequisites", course.getPrerequisites().stream()
+						.map(Course::getId).collect(Collectors.toList()));
+				model.addAttribute("selectedFaculties", course.getFaculties().stream()
+						.map(FacultyModel::getId).collect(Collectors.toList()));
+				return "admin/course/edit";
+			}
+			courseService.editCourse(courseMapper.getCourseDto(course));
+			return "redirect:/admin/course";
+		}
+		catch (Exception e) {
+			model.addAttribute("errorMessage", e.getMessage());
+			return "error";
+		}
 	}
 		
 	@RequestMapping(path = "/admin/course/{id}/delete")
     public String delete(@PathVariable long id, Model model) throws Exception {
-        courseService.deleteCourse(id);
-        return "redirect:/admin/course";
+		try {
+			courseService.deleteCourse(id);
+	        return "redirect:/admin/course";
+		}
+		catch (Exception e) {
+			model.addAttribute("errorMessage", e.getMessage());
+			return "error";
+		}
     }
 }
