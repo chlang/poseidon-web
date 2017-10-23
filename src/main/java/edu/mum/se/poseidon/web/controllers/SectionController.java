@@ -46,25 +46,54 @@ public class SectionController {
 
     @RequestMapping(path = "/admin/section/edit/{id}")
     public String edit(@PathVariable long id, Model model) throws Exception {
-        SectionDto sectionDto = sectionService.getSection(id);
-        SectionModel sectionModel = sectionMapper.getSectionModelFrom(sectionDto);
-        model.addAttribute("sectionModel", sectionModel);
-        return "admin/section/edit";
+        try {
+            SectionDto sectionDto = sectionService.getSection(id);
+            SectionModel sectionModel = sectionMapper.getSectionModelFrom(sectionDto);
+            model.addAttribute("sectionModel", sectionModel);
+            return "admin/section/edit";
+        } catch (Exception e) {
+            if (e.getMessage().contains("404")) {
+                model.addAttribute("errorMessage", "Section is not found. Please check section's data.");
+            } else {
+                model.addAttribute("errorMessage", e.getMessage());
+            }
+            return "error";
+        }
     }
 
     @RequestMapping(path = "/admin/section/edit/{id}", method = RequestMethod.POST)
     public String editPOST(@ModelAttribute("sectionModel") @Valid SectionModel sectionModel,
                            BindingResult bindingResult, @Valid Model model) throws Exception {
-        if (bindingResult.hasErrors()) {
-            return "admin/section/edit";
+        try {
+            if (bindingResult.hasErrors()) {
+                return "admin/section/edit";
+            }
+            sectionService.editSection(sectionMapper.getSectionDtoFrom(sectionModel));
+            return "redirect:/admin/section";
+        } catch (Exception e) {
+            if (e.getMessage().contains("400")) {
+                model.addAttribute("errorMessage", "Section's data is invalid. Please check section's data.");
+            } else if (e.getMessage().contains("404")) {
+                model.addAttribute("errorMessage", "Section is not found. Please check section's data.");
+            } else {
+                model.addAttribute("errorMessage", e.getMessage());
+            }
+            return "error";
         }
-        sectionService.editSection(sectionMapper.getSectionDtoFrom(sectionModel));
-        return "redirect:/admin/section";
     }
 
     @RequestMapping(path = "/admin/section/delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable long id, Model model) throws Exception {
-        sectionService.deleteSection(id);
-        return "redirect:/admin/section";
+        try {
+            sectionService.deleteSection(id);
+            return "redirect:/admin/section";
+        } catch (Exception e) {
+            if (e.getMessage().contains("404")) {
+                model.addAttribute("errorMessage", "Section is not found. Please check section's data.");
+            } else {
+                model.addAttribute("errorMessage", e.getMessage());
+            }
+            return "error";
+        }
     }
 }

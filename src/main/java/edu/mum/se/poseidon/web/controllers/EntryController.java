@@ -53,35 +53,78 @@ public class EntryController {
     @RequestMapping(path = "/admin/entry/create", method = RequestMethod.POST)
     public String createPost(@ModelAttribute("entryModel") @Valid EntryModel entryModel,
                              BindingResult bindingResult, @Valid Model model) throws Exception {
-        if (bindingResult.hasErrors()) {
-            return "admin/entry/create";
+        try {
+            if (bindingResult.hasErrors()) {
+                return "admin/entry/create";
+            }
+            entryService.createEntry(entryMapper.getEntryDtoFrom(entryModel));
+            return "redirect:/admin/entry";
+        } catch (Exception e) {
+            if (e.getMessage().contains("400")) {
+                model.addAttribute("errorMessage", "Entry's data is invalid. Please check entry's data.");
+            } else if (e.getMessage().contains("409")) {
+                model.addAttribute("errorMessage", "Entry is already exist. Please check entry's data.");
+            } else {
+                model.addAttribute("errorMessage", e.getMessage());
+            }
+            return "error";
         }
-        entryService.createEntry(entryMapper.getEntryDtoFrom(entryModel));
-        return "redirect:/admin/entry";
     }
 
     @RequestMapping(path = "/admin/entry/edit/{id}")
     public String edit(@PathVariable long id, Model model) throws Exception {
-        EntryDto entryDto = entryService.getEntry(id);
-        EntryModel entryModel = entryMapper.getEntryModelFrom(entryDto);
-        model.addAttribute("entryModel", entryModel);
-        return "admin/entry/edit";
+        try {
+            EntryDto entryDto = entryService.getEntry(id);
+            EntryModel entryModel = entryMapper.getEntryModelFrom(entryDto);
+            model.addAttribute("entryModel", entryModel);
+            return "admin/entry/edit";
+        } catch (Exception e) {
+            if (e.getMessage().contains("404")) {
+                model.addAttribute("errorMessage", "Entry is not found. Please check entry's data.");
+            } else {
+                model.addAttribute("errorMessage", e.getMessage());
+            }
+            return "error";
+        }
     }
 
     @RequestMapping(path = "/admin/entry/edit/{id}", method = RequestMethod.POST)
     public String editPOST(@ModelAttribute("entryModel") @Valid EntryModel entryModel,
                            BindingResult bindingResult, @Valid Model model) throws Exception {
-
-        if (bindingResult.hasErrors()) {
-            return "admin/entry/edit";
+        try {
+            if (bindingResult.hasErrors()) {
+                return "admin/entry/edit";
+            }
+            entryService.editEntry(entryMapper.getEntryDtoFrom(entryModel));
+            return "redirect:/admin/entry";
+        } catch (Exception e) {
+            if (e.getMessage().contains("400")) {
+                model.addAttribute("errorMessage", "Entry's data is invalid. Please check entry's data.");
+            } else if (e.getMessage().contains("409")) {
+                model.addAttribute("errorMessage", "Entry is already exist. Please check entry's data.");
+            } else if (e.getMessage().contains("404")) {
+                model.addAttribute("errorMessage", "Entry is not found. Please check entry's data.");
+            } else {
+                model.addAttribute("errorMessage", e.getMessage());
+            }
+            return "error";
         }
-        entryService.editEntry(entryMapper.getEntryDtoFrom(entryModel));
-        return "redirect:/admin/entry";
     }
 
     @RequestMapping(path = "/admin/entry/delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable long id, Model model) throws Exception {
-        entryService.deleteEntry(id);
-        return "redirect:/admin/entry";
+        try {
+            entryService.deleteEntry(id);
+            return "redirect:/admin/entry";
+        } catch (Exception e) {
+            if (e.getMessage().contains("400")) {
+                model.addAttribute("errorMessage", "Entry's data is invalid. Please check entry's data.");
+            } else if (e.getMessage().contains("404")) {
+                model.addAttribute("errorMessage", "Entry is not found. Please check entry's data.");
+            } else {
+                model.addAttribute("errorMessage", e.getMessage());
+            }
+            return "error";
+        }
     }
 }

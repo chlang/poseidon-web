@@ -37,40 +37,45 @@ public class StudentRegistrationController {
 
     @RequestMapping(path = "/student/registration", method = RequestMethod.GET)
     public String index(Model model, Authentication authentication) throws Exception {
-    	try {
-	    	CustomAuthUser user = (CustomAuthUser) authentication.getPrincipal();
-	    	long studentId = user.getId();
-	        List<SectionDto> sectionDtoList = studentRegistrationService.getAvailableSections(studentId);
-	        List<RegistrationModel> registrationModelList = registrationMapper.getRegistrationModelFrom(sectionDtoList);
-	        model.addAttribute("registrationModels", registrationModelList);
-	        return "student/registration";
-    	}
-    	catch (Exception e) {
-    		e.printStackTrace();
-            model.addAttribute("errorMessage", e.getMessage());
+        try {
+            CustomAuthUser user = (CustomAuthUser) authentication.getPrincipal();
+            long studentId = user.getId();
+            List<SectionDto> sectionDtoList = studentRegistrationService.getAvailableSections(studentId);
+            List<RegistrationModel> registrationModelList = registrationMapper.getRegistrationModelFrom(sectionDtoList);
+            model.addAttribute("registrationModels", registrationModelList);
+            return "student/registration";
+        } catch (Exception e) {
+            if (e.getMessage().contains("404")) {
+                model.addAttribute("errorMessage", "Section is not found.");
+            } else {
+                model.addAttribute("errorMessage", e.getMessage());
+            }
             return "error";
-    	}
+        }
     }
 
     @RequestMapping(path = "/student/registration", method = RequestMethod.POST)
-    public String registrationPOST(@RequestParam(value="sectionIds", required=false) List<String> sectionIds, 
-    			Model model, Authentication authentication) {
-    	
-    	try {
-	    	CustomAuthUser user = (CustomAuthUser) authentication.getPrincipal();
-	    	long studentId = user.getId();
-	    	if(sectionIds != null) {
-		    	for(String sectionId: sectionIds) {
-		    		studentRegistrationService.registerToSection(studentId, Long.valueOf(sectionId));
-		    	}
-	    	}
-	        return "redirect:/student/registration";
-    	}
-    	catch (Exception e) {
-    		e.printStackTrace();
-            model.addAttribute("errorMessage", e.getMessage());
+    public String registration(@RequestParam(value = "sectionIds", required = false) List<String> sectionIds,
+                               Model model, Authentication authentication) {
+        try {
+            CustomAuthUser user = (CustomAuthUser) authentication.getPrincipal();
+            long studentId = user.getId();
+            if (sectionIds != null) {
+                for (String sectionId : sectionIds) {
+                    studentRegistrationService.registerToSection(studentId, Long.valueOf(sectionId));
+                }
+            }
+            return "redirect:/student/registration";
+        } catch (Exception e) {
+            if (e.getMessage().contains("400")) {
+                model.addAttribute("errorMessage", "Seat is not available or you don't have prequisites.");
+            } else if (e.getMessage().contains("404")) {
+                model.addAttribute("errorMessage", "Section or student is not found.");
+            } else {
+                model.addAttribute("errorMessage", e.getMessage());
+            }
             return "error";
-    	}
+        }
     }
 
 }
