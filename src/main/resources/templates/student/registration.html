@@ -21,6 +21,9 @@
 				    				<th>
 				    					#
 				    				</th>
+									<th>
+										Course name
+									</th>
 				    				<th>
 				    					Faculty
 				    				</th>
@@ -43,6 +46,7 @@
 				    			<tbody>
 				    				<tr th:each="sm, iter : ${rm.sectionModelList}">
 				    					<td th:text="${iter.index + 1}"></td>
+										<td th:text="${sm.name}"></td>
 				    					<td th:text="${sm.facultyFirstName + '' + sm.facultyLastName}"></td>
 				    					<td th:text="${sm.startDate}"></td>
 				    					<td th:text="${sm.endDate}"></td>

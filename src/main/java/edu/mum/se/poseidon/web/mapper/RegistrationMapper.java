@@ -20,12 +20,12 @@ public class RegistrationMapper {
         HashMap<String, List<SectionDto>> hash = new HashMap<>();
         List<RegistrationModel> registrationModel = new ArrayList<>();
         for (SectionDto sectionDto : sectionDtoList) {
-            if (hash.get(sectionDto.getName()) == null) {
+            if (hash.get(sectionDto.getBlockName()) == null) {
                 List<SectionDto> list = new ArrayList<>();
                 list.add(sectionDto);
-                hash.put(sectionDto.getName(), list);
+                hash.put(sectionDto.getBlockName(), list);
             } else {
-                hash.get(sectionDto.getName()).add(sectionDto);
+                hash.get(sectionDto.getBlockName()).add(sectionDto);
             }
         }
         for (String key : hash.keySet()) {
