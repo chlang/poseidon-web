@@ -109,7 +109,10 @@ public class CourseController {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("errorMessage", e.getMessage());
+			if(e.getMessage().contains("409")) {
+				model.addAttribute("errorMessage", "409 the course exists!");
+			}
+			else model.addAttribute("errorMessage", e.getMessage());
 			return "error";
 		}
 	}
@@ -168,7 +171,10 @@ public class CourseController {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("errorMessage", e.getMessage());
+			if(e.getMessage().contains("409")) {
+				model.addAttribute("errorMessage", "409 the course exists!");
+			}
+			else model.addAttribute("errorMessage", e.getMessage());
 			return "error";
 		}
 	}

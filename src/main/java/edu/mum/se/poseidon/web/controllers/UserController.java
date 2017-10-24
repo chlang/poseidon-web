@@ -74,7 +74,10 @@ public class UserController {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			model.addAttribute("errorMessage", e.getMessage());
+			if(e.getMessage().contains("409")) {
+				model.addAttribute("errorMessage", "409 username exists!");
+			}
+			else model.addAttribute("errorMessage", e.getMessage());
             return "error";
 		}
     }
@@ -106,7 +109,10 @@ public class UserController {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			model.addAttribute("errorMessage", e.getMessage());
+			if(e.getMessage().contains("409")) {
+				model.addAttribute("errorMessage", "409 username exists!");
+			}
+			else model.addAttribute("errorMessage", e.getMessage());
             return "error";
 		}
     }
