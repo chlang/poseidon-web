@@ -1,4 +1,4 @@
-package edu.mum.se.poseidon.web.tests;
+package tests;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

@@ -1,4 +1,4 @@
-package edu.mum.se.poseidon.web.tests;
+package tests;
 
 import org.junit.Before;
 import org.junit.Test;
